@@ -33,7 +33,7 @@ const Main = ({ setToggle, toggle }) => {
                             <ul class={`${path === "/vocabulary" && "hidden"}`}>
                                 {
                                     pages.map((page, index) => <li key={index}>
-                                        <Link to={page.link} class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white  hover:bg-gray-200 dark:hover:bg-gray-700">
+                                        <Link to={page.link} class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg">
                                             <img class="w-5 h-5" src={page.icon} />
                                             <span class="ml-3">{page.name}</span>
                                         </Link>
