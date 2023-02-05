@@ -3,9 +3,9 @@ import { BiLike } from "react-icons/bi";
 import { BsBookmarkHeart } from "react-icons/bs";
 
 const Article = () => {
+
     return (
         <>
-
             <article className=" bg-white border rounded-md mb-2">
                 <div className="card">
                     <div className="card-body">
@@ -18,14 +18,14 @@ const Article = () => {
                                 </div>
                             </div>
                             <div className="mb-2">
-                                <p className="card-details text-[15px] font-normal leading-5 text-[#050505]">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, modi ducimus illum vel facere necessitatibus animi voluptates iure accusamus debitis consequatur alias assumenda voluptate perferendis. Ut nulla culpa nam expedita?
+                                <p className="text-content w-full">
+                                    Assalamualaikum. How are you all?  Hopefully you all are good.Alhamdulillah, I'm ok. What are you doing now? Now, I'm passing time in this group for the purpose of practice English. By the way,What about your practice condition?  I'm practice condition is not good. But, I'm trying again start my practice. For this reason, In this evening, I'm making some task.I will complete this task. I think, when i written some task that time this paper helps to remember my task.Please, keep me in your prayer.So that i will practice
                                 </p>
                             </div>
                         </div>
 
                         <div className="card-indention">
-                            <div className="">
+                            <div className="px-0 lg:px-4">
                                 <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--C-Zm_m_9--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9pf1tn6ixwtfh90qa01l.jpg" className="card-img h-auto w-full object-cover mb-3" />
                             </div>
 
@@ -48,7 +48,6 @@ const Article = () => {
                     </div>
                 </div>
             </article>
-
             <article className=" bg-white border rounded-md mb-2">
                 <div className="card">
                     <div className="card-body">
@@ -61,14 +60,16 @@ const Article = () => {
                                 </div>
                             </div>
                             <div className="mb-2">
-                                <p className="card-details text-[15px] font-normal leading-5 text-[#050505]">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Laudantium, modi ducimus illum vel facere necessitatibus animi voluptates iure accusamus debitis consequatur alias assumenda voluptate perferendis. Ut nulla culpa nam expedita?
+                                <p className="text-content w-full">
+                                    Assalamualaikum. How are you all?  Hopefully you all are good.Alhamdulillah, I'm ok. What are you doing now? Now, I'm passing time in this group for the purpose of practice English. By the way,What about your practice condition?  I'm practice condition is not good. But, I'm trying again start my practice. For this reason, In this evening, I'm making some task.I will complete this task. I think, when i written some task that time this paper helps to remember my task.Please, keep me in your prayer.So that i will practice
                                 </p>
                             </div>
                         </div>
 
                         <div className="card-indention">
-                            <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--C-Zm_m_9--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9pf1tn6ixwtfh90qa01l.jpg" className="card-img h-auto w-full object-cover mb-3 px-4" />
+                            <div className="px-0 lg:px-4">
+                                <img src="https://res.cloudinary.com/practicaldev/image/fetch/s--C-Zm_m_9--/c_imagga_scale,f_auto,fl_progressive,h_420,q_auto,w_1000/https://dev-to-uploads.s3.amazonaws.com/uploads/articles/9pf1tn6ixwtfh90qa01l.jpg" className="card-img h-auto w-full object-cover mb-3" />
+                            </div>
 
                             <div className="card-bottom flex justify-between mx-4 border-t py-1">
                                 <div className="flex gap-2">

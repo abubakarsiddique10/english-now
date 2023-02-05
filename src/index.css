@@ -1,4 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&family=Merriweather:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Source+Sans+Pro:wght@400;600;700;900&display=swap');
+
+
+/* font-family: 'Bubblegum Sans', cursive;
+font-family: 'Merriweather', serif;
+font-family: 'Poppins', sans-serif;
+font-family: 'Source Sans Pro', sans-serif; */
+
 
 @tailwind base;
 @tailwind components;
@@ -6,19 +13,67 @@
 
 * {
     font-size: 16px;
-    font-weight: 400;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
 }
-body{
+.body-color{
     background-color: #F0F2F5;
+    background: #F8FAFB;
 }
+
 .bar {
     height: 100vh;
 }
+
+.v_card:hover .icon {
+    transform: scale(1.1);
+}
+.v_card .icon {
+    transition: ease-in;
+    transition-duration: .1s;
+    
+}
+.v_card {
+
+/*   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 15px; */
+
+ /*  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px; */
+ 
+box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px; 
+}
+
+@layer components {
+    /* common css */
+    .main-title {
+        @apply mb-10 capitalize text-3xl font-['Bubblegum_Sans'] text-center
+    }
+    .sub_title {
+        @apply font-semibold leading-6 text-lg font-['Merriweather'] text-[#363637]
+    }
+
+    .hamburger {
+        @apply md:hidden w-8 h-8 flex items-center justify-center 
+        hover:bg-gray-200 rounded-full absolute top-4 right-4
+    }
+    .sidebar {
+        @apply flex-1 md:side-bar fixed top-0 h-screen bg-white md:bg-inherit md:sticky md:top-[67px] w-full max-w-[250px] lg:max-w-[300px] border-r transition-all ease-in duration-500 left-[-300px]
+    }
+
+    /* card css */
+    .text-content {
+        @apply font-['Source_Sans_Pro'] text-base font-normal leading-5 text-[#121212]
+    }
+    .nav-link {
+        @apply flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white  hover:bg-gray-200 font-['Poppins']
+    }
+}
+
+
 
 
 @layer utilities {
     .side-bar {
         height: calc(100vh - 67px);
     }
+    
 }

@@ -1,6 +1,10 @@
+import { Outlet } from "react-router-dom"
+
 const Vocabulary = () => {
     return (
-        <h1>this is Vocabulary</h1>
+        <>
+            <Outlet />
+        </>
     )
 }
 export default Vocabulary
