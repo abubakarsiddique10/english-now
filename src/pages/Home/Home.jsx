@@ -1,8 +1,12 @@
 import ArticleRendered from "../../components/Articles/ArticleRendered"
+import Post from "../../components/Post/Post"
 
-const Home = () => {
+const Home = ({ postToggle }) => {
+    console.log(postToggle)
     return (
-        <ArticleRendered />
+        <>
+            <ArticleRendered />
+        </>
     )
 }
 export default Home

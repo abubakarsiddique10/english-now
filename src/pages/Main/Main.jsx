@@ -1,35 +1,46 @@
 import { BsX } from "react-icons/bs";
 import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
-import Home from "../../pages/Home/Home";
-import Vocabulary from "../../pages/Vocabulary/Vocabulary";
+import Home from "../Home/Home";
+import Vocabulary from "../Vocabulary/Vocabulary";
 import home from "../../assets/icons/home.png";
 import vocabulary from "../../assets/icons/dictionary.png";
 import pattern from "../../assets/icons/pattern.png";
 import story from "../../assets/icons/book.png";
-import VocabularyRendered from "../../pages/Vocabulary/VocabularyRendered";
-import VocabularyCategory from "../../pages/Vocabulary/VocabularyCategory";
+import VocabularyRendered from "../Vocabulary/VocabularyRendered";
+import VocabularyCategory from "../Vocabulary/VocabularyCategory";
+import Dashboard from "../dashboard/Dashboard";
+import AddVocabulary from "../dashboard/AddVocabulary";
+import Post from "../../components/Post/Post";
+import { useContext } from "react";
+import { HandlerContext } from "../../App";
+import SignUp from "../Login/SignUp";
+import Login from "../Login/Login";
+import Profile from "../Profile/Profile";
+import RequireAuth from "../../RequireAuth/RequireAuth";
 
 
 
-const Main = ({ setToggle, toggle }) => {
+const Main = () => {
+    const { handleHamburger, toggleHamburger } = useContext(HandlerContext)
 
     const pages = [
         { name: "Home", link: "/", icon: home },
         { name: "Vocabulary", link: "/vocabulary", icon: vocabulary },
         { name: "Story", link: "/story", icon: story },
         { name: "Pattern", link: "/pattern", icon: pattern },
+        { name: "Dashboard", link: "/Dashboard", icon: pattern },
     ]
 
     const location = useLocation();
     const path = location.pathname;
 
     return (
-        <div className={`w-full ${path === "/" ? "body-color" : "null"}`}>
-            <div className="md:container">
+        <main className={`w-full ${path === "/" ? "body-color" : "null"}`}>
+            <div className="md:container ">
                 <div className="flex md:gap-5 ">
-                    <aside class={`sidebar ${toggle ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
+                    <aside class={`sidebar ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
                         <div class="pr-14 md:pr-4 py-3 rounded relative">
-                            <div onClick={() => setToggle(!toggle)} className="hamburger">
+                            <div onClick={handleHamburger} className="hamburger">
                                 <BsX className="text-3xl" />
                             </div>
                             <ul>
@@ -52,11 +63,20 @@ const Main = ({ setToggle, toggle }) => {
                                 <Route index element={<VocabularyCategory />} />
                                 <Route path=":category" element={<VocabularyRendered />} />
                             </Route>
+                            <Route path="/dashboard" element={<Dashboard />}>
+                                <Route path="addVocabulary" element={<AddVocabulary />} />
+                            </Route>
+                            <Route path="/post" element={<Post />} />
+                            <Route path="/signup" element={<SignUp />} />
+                            <Route path="/login" element={<Login />} />
+                            <Route path="/profile" element={<RequireAuth>
+                                <Profile />
+                            </RequireAuth>} />
                         </Routes>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     )
 }
 export default Main;

@@ -25,13 +25,13 @@ font-family: 'Source Sans Pro', sans-serif; */
     height: 100vh;
 }
 
+
 .v_card:hover .icon {
     transform: scale(1.1);
 }
 .v_card .icon {
     transition: ease-in;
     transition-duration: .1s;
-    
 }
 .v_card {
 
@@ -40,6 +40,10 @@ font-family: 'Source Sans Pro', sans-serif; */
  /*  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px; */
  
 box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px; 
+}
+
+.active {   
+    filter: brightness(80%);
 }
 
 @layer components {
@@ -56,7 +60,7 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
         hover:bg-gray-200 rounded-full absolute top-4 right-4
     }
     .sidebar {
-        @apply flex-1 md:side-bar fixed top-0 h-screen bg-white md:bg-inherit md:sticky md:top-[67px] w-full max-w-[250px] lg:max-w-[300px] border-r transition-all ease-in duration-500 left-[-300px]
+        @apply flex-1 md:height fixed top-0 h-screen bg-white md:bg-inherit md:sticky md:top-[67px] w-full max-w-[250px] lg:max-w-[300px] border-r transition-all ease-in duration-500 left-[-300px]
     }
 
     /* card css */
@@ -66,14 +70,21 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
     .nav-link {
         @apply flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white  hover:bg-gray-200 font-['Poppins']
     }
+    .PhoneInput {
+        @apply border pl-3 mb-3 
+    }
+    .PhoneInput .PhoneInputInput {
+        @apply py-3 border-l pl-1 ml-1
+    }
 }
 
-
-
-
 @layer utilities {
-    .side-bar {
+    .height {
         height: calc(100vh - 67px);
     }
     
 }
+
+
+
+
