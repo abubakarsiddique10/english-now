@@ -1,46 +1,48 @@
 import { useContext, useState } from "react"
 import { BsX } from "react-icons/bs";
-import { HandlerContext } from "../../App"
+import { AppContext } from "../../App"
 import { GrGallery } from "react-icons/gr";
 import moment from 'moment';
 import Textarea from "../Form/Textarea";
 
 
 const Post = () => {
-    const { togglePost, handlePost } = useContext(HandlerContext);
+    const { user } = useContext(AppContext);
+    const phoneNumber = user?.phoneNumber;
+    const userImgURL = user?.userImgURL;
+    const userName = user?.userName;
+
+    const { togglePost, handlePost } = useContext(AppContext);
+
     const [value, setValue] = useState({
         description: "",
-        image: "",
-        author: { name: "", image: "", url: "" }
+        postImgURL: "",
+        comments: [],
+        likes: 0,
     });
-
-
-    /*  const time = moment().format();
-     const postTime = moment("2023-02-14T15:28:45+06:00");
-     console.log(postTime.fromNow()) */
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        const time = moment().format()
+        console.log(value)
         const formData = new FormData();
+        formData.append('userName', userName);
+        formData.append('userImgURL', userImgURL);
+        formData.append('phoneNumber', phoneNumber);
+        formData.append('description', value.description);
+        formData.append('postImgURL', value.postImgURL);
+        formData.append('comments', value.comments);
+        formData.append('likes', value.likes);
 
-        formData.append('description', value.post);
-        formData.append('image', value.image);
-        formData.append('datePublished', time);
-
-        fetch('http://localhost:5000/userspost', {
+        fetch('http://localhost:5000/api/v1/userPost', {
             method: "POST",
             body: formData
-        })
-
-        setValue({ post: "", image: "" })
-        console.log(value)
+        }).then((res) => res.json())
+            .then(data => console.log(data))
     }
 
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
     }
-
 
     return (
         <>
@@ -55,26 +57,26 @@ const Post = () => {
                     <div className="h-40">
                         <Textarea
                             handleChange={handleChange}
-                            placeholder="What's on your mind?"
-                            value={value.post}
+                            placeholder="Write your post content here..."
+                            value={value.description}
                             required={true}
                             name="description" />
                     </div>
                     <div className="flex items-center my-3 justify-center">
                         <h3 className="font-medium mr-4">Add an image to your post</h3>
-                        <label class="border-blue cursor-pointer ">
+                        <label className="border-blue cursor-pointer ">
                             <GrGallery className="text-xl" />
                             <input
                                 onChange={(e) => setValue({ ...value, [e.target.name]: e.target.files[0] })}
                                 type='file'
-                                name="image"
+                                name="postImgURL"
                                 className="hidden" />
                         </label>
                     </div>
-                    <div className="">
+                    <div >
                         <button
-                            class={`w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ${!value.post && "opacity-60"}`}
-                            disabled={!value.post}
+                            className={`w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ${!value.description && "opacity-60"}`}
+                            disabled={!value.description}
                             type="submit"
                             width="w-full">Post</button>
                     </div>

@@ -15,7 +15,7 @@ const VocabularyCategory = () => {
 
             <div className="grid grid-cols-4 gap-6">
                 {
-                    categories.map(item => <div className="flex items-center gap-1.5 cursor-pointer v_card pl-1">
+                    categories.map((item, index) => <div key={index} className="flex items-center gap-1.5 cursor-pointer v_card pl-1">
                         <div className={`w-[50px] h-[50px] flex items-center justify-center rounded`}>
                             <img src={item.icon} />
                         </div>

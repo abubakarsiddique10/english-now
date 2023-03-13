@@ -1,17 +1,20 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from 'react-phone-number-input'
-import Button from "../../components/Button/Button"
+import { Button } from "../../components/Button/Button";
 import Label from "../../components/Form/Label"
 import TextField from "../../components/Form/TextField"
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input"
+import { AppContext } from "../../App";
 
 const Login = () => {
+    const { user } = useContext(AppContext)
     const [value, setValue] = useState({
         phoneNumber: "",
         password: "",
     });
+
     const [error, setError] = useState('');
     const navigate = useNavigate()
 
@@ -72,13 +75,14 @@ const Login = () => {
                             placeholder="Password"
                             type="password"
                             value={value.password}
+                            required={true}
                             name="password" />
                     </div>
 
                     {error && <span>{error}</span>}
 
                     <div className="text-center">
-                        <Button width="w-[150px]" type="submit">Sign Up</Button>
+                        <Button width="w-[150px]" type="submit">Log in</Button>
                     </div>
                     <div className="mt-3 text-center">
                         <span>Don't have account? please </span>

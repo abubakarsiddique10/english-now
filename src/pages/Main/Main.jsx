@@ -12,16 +12,17 @@ import Dashboard from "../dashboard/Dashboard";
 import AddVocabulary from "../dashboard/AddVocabulary";
 import Post from "../../components/Post/Post";
 import { useContext } from "react";
-import { HandlerContext } from "../../App";
+import { AppContext } from "../../App";
 import SignUp from "../Login/SignUp";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
-import RequireAuth from "../../RequireAuth/RequireAuth";
+import RequireAuth from "../../Authentication/RequireAuth";
+import ProfileUpdate from "../Profile/ProfileUpdate";
 
 
 
 const Main = () => {
-    const { handleHamburger, toggleHamburger } = useContext(HandlerContext)
+    const { handleHamburger, toggleHamburger } = useContext(AppContext)
 
     const pages = [
         { name: "Home", link: "/", icon: home },
@@ -38,17 +39,17 @@ const Main = () => {
         <main className={`w-full ${path === "/" ? "body-color" : "null"}`}>
             <div className="md:container ">
                 <div className="flex md:gap-5 ">
-                    <aside class={`sidebar ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
-                        <div class="pr-14 md:pr-4 py-3 rounded relative">
+                    <aside className={`sidebar ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
+                        <div className="pr-14 md:pr-4 py-3 rounded relative">
                             <div onClick={handleHamburger} className="hamburger">
                                 <BsX className="text-3xl" />
                             </div>
                             <ul>
                                 {
                                     pages.map((page, index) => <li key={index}>
-                                        <Link to={page.link} class="nav-link">
-                                            <img class="w-5 h-5" src={page.icon} />
-                                            <span class="ml-3">{page.name}</span>
+                                        <Link to={page.link} className="nav-link">
+                                            <img className="w-5 h-5" src={page.icon} />
+                                            <span className="ml-3">{page.name}</span>
                                         </Link>
                                     </li>)
                                 }
@@ -71,6 +72,9 @@ const Main = () => {
                             <Route path="/login" element={<Login />} />
                             <Route path="/profile" element={<RequireAuth>
                                 <Profile />
+                            </RequireAuth>} />
+                            <Route path="/profileEdit" element={<RequireAuth>
+                                <ProfileUpdate />
                             </RequireAuth>} />
                         </Routes>
                     </div>

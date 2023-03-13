@@ -1,18 +1,18 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from 'react-phone-number-input'
-import Button from "../../components/Button/Button"
 import Label from "../../components/Form/Label"
 import TextField from "../../components/Form/TextField"
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input"
+import { Button } from "../../components/Button/Button";
 
 const SignUp = () => {
     const [value, setValue] = useState({
         userName: "",
         phoneNumber: "",
         password: "",
-        imageUrl: "avater.png",
+        userImgURL: "avater.png",
     });
     const [error, setError] = useState("")
     const navigate = useNavigate();
@@ -65,6 +65,7 @@ const SignUp = () => {
                             handleChange={handleChange}
                             placeholder="Name"
                             type="text"
+                            required={true}
                             value={value.userName}
                             name="userName" />
                     </div>
@@ -85,6 +86,7 @@ const SignUp = () => {
                             handleChange={handleChange}
                             placeholder="Password"
                             type="password"
+                            required={true}
                             value={value.password}
                             name="password" />
                     </div>

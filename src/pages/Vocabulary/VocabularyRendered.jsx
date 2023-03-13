@@ -36,7 +36,7 @@ const VocabularyRendered = () => {
         }
 
     ];
-    console.log(vocabulary)
+
 
     /*  const vegetables = [
          { word: "cabbage", meaning: "বাঁধাকপি", image: cabbage, sentence: "", synonym: [], antonym: [] },

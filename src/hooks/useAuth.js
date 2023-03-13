@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react"
 
-const useProfile = (n, m) => {
+const useAuth = () => {
     const [user, setUser] = useState(null);
-    const [error, setError] = useState('')
+    const [error, setError] = useState('');
+
     useEffect(() => {
         fetch('http://localhost:5000/api/v1/user/profile', {
             headers: {
@@ -14,10 +15,10 @@ const useProfile = (n, m) => {
                     setUser(data)
                 }
                 else if (error) {
-                    setError(error)
+                    setError(error);
                 }
             })
     }, [])
-    return { user, error }
+    return { user, error, setUser }
 }
-export default useProfile
+export default useAuth

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import Button from "../../components/Button/Button";
+import { Button } from "../../components/Button/Button";
 import Label from "../../components/Form/Label";
 import Textarea from "../../components/Form/Textarea";
 import TextField from "../../components/Form/TextField";
@@ -60,7 +60,6 @@ const AddVocabulary = () => {
         formData.append("sentence", sentence);
         formData.append("synonym", synonym);
         formData.append("antonym", antonym);
-        //http://localhost:5000/vocabulary
         fetch('http://localhost:5000/api/v1/vocabulary', {
             method: "PUT",
             body: formData
