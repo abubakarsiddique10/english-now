@@ -17,8 +17,7 @@ function App() {
   const handleHamburger = () => {
     setToggleHamburger(!toggleHamburger)
   }
-  const provideValue = { handlePost, handleHamburger, setUser, user, errror, togglePost, toggleHamburger }
-
+  const provideValue = { handlePost, handleHamburger, setUser, setTogglePost, user, errror, togglePost, toggleHamburger }
 
   return (
     <>

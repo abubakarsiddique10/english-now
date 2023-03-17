@@ -53,13 +53,13 @@ const Login = () => {
 
 
     return (
-        <div className="w-full h-screen flex justify-center items-center height">
-            <div className="w-[500px] border p-5">
-                <h1 className="mb-10">Login</h1>
+        <div className="h-screen flex justify-center items-center height">
+            <div className="w-full max-w-[500px] border px-2 md:p-10">
+                <h1 className="mb-10 login_title">Login</h1>
                 <form onSubmit={handleFormSubmit}>
 
-                    <div className="w-full">
-                        <Label label="Enter your mobile number" />
+                    <div className="w-full pb-3">
+                        <Label label="Your mobile number" />
                         <PhoneInput
                             international
                             defaultCountry="BD"
@@ -69,7 +69,7 @@ const Login = () => {
                     </div>
 
                     <div className="w-full">
-                        <Label label="Enter your password" />
+                        <Label label="Enter password" />
                         <TextField
                             handleChange={handleChange}
                             placeholder="Password"
@@ -82,7 +82,7 @@ const Login = () => {
                     {error && <span>{error}</span>}
 
                     <div className="text-center">
-                        <Button width="w-[150px]" type="submit">Log in</Button>
+                        <Button width="full" type="submit">Login</Button>
                     </div>
                     <div className="mt-3 text-center">
                         <span>Don't have account? please </span>

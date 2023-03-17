@@ -22,11 +22,8 @@ const AddVocabulary = () => {
         meaning: "",
         image: "",
         category: "",
-        sentence: "",
-        synonym: [],
-        antonym: [],
     })
-    const { word, meaning, image, category, sentence, synonym, antonym } = value;
+    const { word, meaning, image, category } = value;
 
 
     const handleChange = (e) => {
@@ -57,9 +54,6 @@ const AddVocabulary = () => {
         formData.append("word", word);
         formData.append("meaning", meaning);
         formData.append("image", image);
-        formData.append("sentence", sentence);
-        formData.append("synonym", synonym);
-        formData.append("antonym", antonym);
         fetch('http://localhost:5000/api/v1/vocabulary', {
             method: "PUT",
             body: formData

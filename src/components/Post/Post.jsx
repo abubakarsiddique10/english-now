@@ -2,42 +2,40 @@ import { useContext, useState } from "react"
 import { BsX } from "react-icons/bs";
 import { AppContext } from "../../App"
 import { GrGallery } from "react-icons/gr";
-import moment from 'moment';
 import Textarea from "../Form/Textarea";
 
 
 const Post = () => {
-    const { user } = useContext(AppContext);
+    const { user, setTogglePost } = useContext(AppContext);
     const phoneNumber = user?.phoneNumber;
     const userImgURL = user?.userImgURL;
     const userName = user?.userName;
-
     const { togglePost, handlePost } = useContext(AppContext);
 
     const [value, setValue] = useState({
         description: "",
         postImgURL: "",
-        comments: [],
-        likes: 0,
     });
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        console.log(value)
         const formData = new FormData();
         formData.append('userName', userName);
         formData.append('userImgURL', userImgURL);
         formData.append('phoneNumber', phoneNumber);
         formData.append('description', value.description);
         formData.append('postImgURL', value.postImgURL);
-        formData.append('comments', value.comments);
-        formData.append('likes', value.likes);
 
         fetch('http://localhost:5000/api/v1/userPost', {
             method: "POST",
             body: formData
         }).then((res) => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                if (data.status) {
+                    console.log(data)
+                    setTogglePost(!togglePost)
+                }
+            })
     }
 
     const handleChange = (e) => {

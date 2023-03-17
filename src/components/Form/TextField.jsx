@@ -9,7 +9,7 @@ const TextField = ({ handleChange, placeholder, type, value, name, required }) =
         <input
             onChange={handleChange}
             onKeyDown={handleKeyDown}
-            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-3"
+            className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-3 px-4 mb-6"
             type={type}
             name={name}
             required={required}

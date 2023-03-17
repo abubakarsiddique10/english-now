@@ -22,8 +22,8 @@ import ProfileUpdate from "../Profile/ProfileUpdate";
 
 
 const Main = () => {
-    const { handleHamburger, toggleHamburger } = useContext(AppContext)
-
+    const { handleHamburger, toggleHamburger, user } = useContext(AppContext);
+    const role = user?.role
     const pages = [
         { name: "Home", link: "/", icon: home },
         { name: "Vocabulary", link: "/vocabulary", icon: vocabulary },
@@ -38,21 +38,39 @@ const Main = () => {
     return (
         <main className={`w-full ${path === "/" ? "body-color" : "null"}`}>
             <div className="md:container ">
-                <div className="flex md:gap-5 ">
-                    <aside className={`sidebar ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
+                <div className="flex md:gap-5">
+                    <aside className={`sidebar z-50 ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
                         <div className="pr-14 md:pr-4 py-3 rounded relative">
                             <div onClick={handleHamburger} className="hamburger">
                                 <BsX className="text-3xl" />
                             </div>
-                            <ul>
-                                {
+                            <ul className="manu">
+                                <li>
+                                    <Link to="/" className="nav-link">
+                                        <img className="w-5 h-5" src={home} />
+                                        <span className="ml-3">Home</span>
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link to="/Vocabulary" className="nav-link">
+                                        <img className="w-5 h-5" src={vocabulary} />
+                                        <span className="ml-3">Vocabulary</span>
+                                    </Link>
+                                </li>
+                                {role === "admin_SRRS@b$e" && <li>
+                                    <Link to="/Dashboard" className="nav-link">
+                                        <img className="w-5 h-5" src={pattern} />
+                                        <span className="ml-3">Dashboard</span>
+                                    </Link>
+                                </li>}
+                                {/* {
                                     pages.map((page, index) => <li key={index}>
                                         <Link to={page.link} className="nav-link">
                                             <img className="w-5 h-5" src={page.icon} />
                                             <span className="ml-3">{page.name}</span>
                                         </Link>
                                     </li>)
-                                }
+                                } */}
                             </ul>
                         </div>
                     </aside>

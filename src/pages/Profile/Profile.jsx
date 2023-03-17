@@ -34,11 +34,11 @@ const Profile = () => {
 
     return (
         <section>
-            <div className="md:flex gap-5">
+            <div className="md:flex gap-5 px-2">
                 <div className="max-w-[300px] h-full top-0 md:sticky md:top-[80px] mx-auto md:mx-0 md:my-0 my-5 md:b-0">
                     <img src={`http://localhost:5000/assets/avater/${user?.userImgURL}`} className="sm:max-w-[300px] sm:max-h-[300px] max-w-52 max-h-52 rounded-full object-cover mx-auto" />
-                    <div className="relative">
-                        <h5 className={`text-xl font-medium mt-4 text-center `}>{user?.userName}</h5>
+                    <div >
+                        <h5 className={`text-xl font-medium mt-4 text-center`}>{user?.userName}</h5>
                     </div>
 
                     <div className="flex md:flex-col gap-3 mt-2">
