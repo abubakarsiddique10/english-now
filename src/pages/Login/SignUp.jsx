@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import PhoneInput from 'react-phone-number-input'
 import Label from "../../components/Form/Label"
@@ -8,6 +8,7 @@ import { isValidPhoneNumber } from "react-phone-number-input"
 import { Button } from "../../components/Button/Button";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
 import auth from "../../firebase.init";
+import baseURL from "../../api/api";
 
 const SignUp = () => {
     const [value, setValue] = useState({
@@ -40,7 +41,7 @@ const SignUp = () => {
         if (!isValid) return setError('number is not valid');
         if (value.password.length < 5) return setError('password must be at least 5 characters');
 
-        const checkUser = await fetch(`http://localhost:5000/api/v1/user/checkUser/${value.phoneNumber}`)
+        const checkUser = await fetch(`${baseURL}/api/v1/user/checkUser/${value.phoneNumber}`)
             .then(res => res.json())
             .then(data => {
                 if (!data.status) {
@@ -66,7 +67,7 @@ const SignUp = () => {
         try {
             const confirm = await result.confirm(otp);
             if (confirm?.user?.phoneNumber) {
-                fetch('http://localhost:5000/api/v1/user/signup', {
+                fetch(`${baseURL}/api/v1/user/signup`, {
                     method: "POST",
                     headers: {
                         'content-type': "application/json"
@@ -94,48 +95,49 @@ const SignUp = () => {
         <div className="h-screen flex justify-center items-center height">
             <div className="w-full max-w-[500px] border px-2 md:p-10">
                 <h1 className="mb-10 login_title">SignUp</h1>
-                {!result ? <form onSubmit={handleFormSubmit}>
-                    <div className="w-full">
-                        <Label label="Your name" />
-                        <TextField
-                            handleChange={handleChange}
-                            placeholder="Name"
-                            type="text"
-                            required={true}
-                            value={value.userName}
-                            name="userName" />
-                    </div>
+                {!result ?
+                    <form onSubmit={handleFormSubmit}>
+                        <div className="w-full">
+                            <Label label="Your name" />
+                            <TextField
+                                handleChange={handleChange}
+                                placeholder="Name"
+                                type="text"
+                                required={true}
+                                value={value.userName}
+                                name="userName" />
+                        </div>
 
-                    <div className="w-full mb-6">
-                        <Label label="Your mobile number" />
-                        <PhoneInput
-                            international
-                            defaultCountry="BD"
-                            countryCallingCodeEditable={false}
-                            value={value.phoneNumber}
-                            onChange={e => setValue({ ...value, phoneNumber: e })} />
-                    </div>
-                    <div id="recaptcha-container" />
+                        <div className="w-full mb-6">
+                            <Label label="Your mobile number" />
+                            <PhoneInput
+                                international
+                                defaultCountry="BD"
+                                countryCallingCodeEditable={false}
+                                value={value.phoneNumber}
+                                onChange={e => setValue({ ...value, phoneNumber: e })} />
+                        </div>
+                        <div id="recaptcha-container" />
 
-                    <div className="w-full">
-                        <Label label="Enter password" />
-                        <TextField
-                            handleChange={handleChange}
-                            placeholder="Password"
-                            type="password"
-                            required={true}
-                            value={value.password}
-                            name="password" />
-                    </div>
-                    {error ? <p>{error}</p> : ""}
-                    <div className="text-center">
-                        <Button width="full" type="submit">Sign Up</Button>
-                    </div>
-                    <div className="mt-3 text-center">
-                        <span>Already have an acount</span>
-                        <Link className="text-blue-500" to="/login"> Login</Link>
-                    </div>
-                </form> :
+                        <div className="w-full">
+                            <Label label="Enter password" />
+                            <TextField
+                                handleChange={handleChange}
+                                placeholder="Password"
+                                type="password"
+                                required={true}
+                                value={value.password}
+                                name="password" />
+                        </div>
+                        {error ? <p>{error}</p> : ""}
+                        <div className="text-center">
+                            <Button width="full" type="submit">Sign Up</Button>
+                        </div>
+                        <div className="mt-3 text-center">
+                            <span>Already have an acount?</span>
+                            <Link className="text-blue-500" to="/login"> Login</Link>
+                        </div>
+                    </form> :
                     <div className="mt-8">
                         <h1 className="text-2xl mb-3">Enter OTP</h1>
                         <form onSubmit={handleVerifyOTP}>

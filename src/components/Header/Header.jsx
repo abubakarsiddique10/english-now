@@ -5,6 +5,7 @@ import { BsBell } from "react-icons/bs";
 import { FiMenu } from "react-icons/fi";
 import { PostButton } from "../Button/Button";
 import { AppContext } from "../../App";
+import baseURL from "../../api/api";
 
 
 const Header = () => {
@@ -28,7 +29,7 @@ const Header = () => {
 
                         {user ?
                             <Link to="/profile" className="w-9 h-9 p-[3px] rounded-full ring-2 ">
-                                <img className="rounded-full" src={`http://localhost:5000/assets/avater/${user?.userImgURL}`} alt="avatar" />
+                                <img className="rounded-full" src={`${baseURL}/assets/avater/${user?.userImgURL}`} alt="avatar" />
                             </Link> : <Link to="/login"> <Button>Login</Button></Link>}
                     </div>
                 </div>

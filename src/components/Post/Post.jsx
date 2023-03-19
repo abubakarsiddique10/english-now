@@ -3,6 +3,7 @@ import { BsX } from "react-icons/bs";
 import { AppContext } from "../../App"
 import { GrGallery } from "react-icons/gr";
 import Textarea from "../Form/Textarea";
+import baseURL from "../../api/api";
 
 
 const Post = () => {
@@ -26,7 +27,7 @@ const Post = () => {
         formData.append('description', value.description);
         formData.append('postImgURL', value.postImgURL);
 
-        fetch('http://localhost:5000/api/v1/userPost', {
+        fetch(`${baseURL}/api/v1/userPost`, {
             method: "POST",
             body: formData
         }).then((res) => res.json())

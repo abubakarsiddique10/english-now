@@ -3,7 +3,6 @@ import Header from "./components/Header/Header";
 import Main from "../src/pages/Main/Main";
 import Post from "./components/Post/Post";
 import useAuth from "./hooks/useAuth";
-
 export const AppContext = createContext(null)
 
 function App() {
@@ -18,6 +17,7 @@ function App() {
     setToggleHamburger(!toggleHamburger)
   }
   const provideValue = { handlePost, handleHamburger, setUser, setTogglePost, user, errror, togglePost, toggleHamburger }
+
 
   return (
     <>

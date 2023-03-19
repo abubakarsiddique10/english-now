@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import baseURL from "../../api/api";
 import { Button } from "../../components/Button/Button";
 import Label from "../../components/Form/Label";
 import Textarea from "../../components/Form/Textarea";
@@ -47,28 +48,57 @@ const AddVocabulary = () => {
         setValue({ ...value, image: e.target.files[0] })
     }
 
+
+    //imgbb key
+    const imgbbKey = "92a0ac09a387a131feb37c056488ca5e";
+    const url = `https://api.imgbb.com/1/upload?key=${imgbbKey}`;
+
+    //cloudinary key
+
+
+
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const formData = new FormData;
-        formData.append("category", category);
-        formData.append("word", word);
-        formData.append("meaning", meaning);
-        formData.append("image", image);
-        fetch('http://localhost:5000/api/v1/vocabulary', {
-            method: "PUT",
-            body: formData
-        })
-            .then(data => data.json())
-            .then(data => console.log(data))
-            .catch((error) => {
-                console.log(error)
+        /*  formData.append("category", category);
+         formData.append("word", word);
+         formData.append("meaning", meaning);
+         formData.append("image", image);
+  */
+
+        formData.append('image', value.image);
+
+        fetch(url, {
+            method: "POST",
+            body: formData,
+        }).then(res => res.json())
+            .then(data => {
+                if (data.success && data.url) {
+                    console.log('asce,', data)
+                } else {
+                    console.log(data)
+                }
             })
+
+
+        /* 
+                fetch(`${baseURL}/api/v1/vocabulary`, {
+                    method: "PUT",
+                    body: formData
+                })
+                    .then(data => data.json())
+                    .then(data => console.log(data))
+                    .catch((error) => {
+                        console.log(error)
+                    }) */
     }
 
     return (
         <form onSubmit={handleSubmit} className="mt-20 border">
             <div className="bg-white rounded px-5 md:px-14 pt-6 flex flex-col my-2 ">
-                <div className="-mx-3 md:flex md:gap-8 mb-5">
+                {/* <div className="-mx-3 md:flex md:gap-8 mb-5">
                     <div className="w-full">
                         <Label label="Enter Word" />
                         <TextField
@@ -87,7 +117,7 @@ const AddVocabulary = () => {
                             name="meaning"
                             value={value.meaning} />
                     </div>
-                </div>
+                </div> */}
                 <div className="-mx-3 md:flex md:gap-8 mb-5">
                     <div className="w-full">
                         <Label label="Enter Image" />
@@ -98,7 +128,7 @@ const AddVocabulary = () => {
                             name="image"
                             className="appearance-none block w-full bg-grey-lighter text-grey-darker border border-red rounded py-2.5 px-4 mb-3" />
                     </div>
-                    <div className="w-full">
+                    {/*  <div className="w-full">
                         <Label label="Cetagory" />
                         <div className="relative">
                             <select
@@ -116,7 +146,7 @@ const AddVocabulary = () => {
                                 <svg className="h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
 
                 <div className="-mx-3 md:flex md:gap-8 mb-7">

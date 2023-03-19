@@ -5,6 +5,7 @@ import moment from "moment";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Comment from "./Comment";
+import baseURL from "../../api/api";
 
 const Card = ({ post }) => {
     const { userName, createdAt, description, postImgURL, userImgURL, _id, comments, likes } = post;
@@ -20,7 +21,7 @@ const Card = ({ post }) => {
     const handleSubmitForm = (e) => {
         e.preventDefault();
         if (user) {
-            fetch(`http://localhost:5000/api/v1/userPost/${_id}`, {
+            fetch(`${baseURL}/api/v1/userPost/${_id}`, {
                 method: "PATCH",
                 headers: {
                     'content-type': "application/json"
@@ -35,7 +36,7 @@ const Card = ({ post }) => {
         }
     }
     const handleLike = () => {
-        fetch(`http://localhost:5000/api/v1/userPost/like/${_id}`, {
+        fetch(`${baseURL}/api/v1/userPost/like/${_id}`, {
             method: "PATCH",
             headers: {
                 'content-type': "application/json"
@@ -44,14 +45,13 @@ const Card = ({ post }) => {
         }).then(res => res.json())
             .then(data => data)
     }
-
     return (
         <>
             <article className="card bg-white border rounded-md mb-2">
                 <div className="card-body">
                     <div className="card-top p-4 pb-0">
                         <div className="flex flex-wrap items-top gap-2 mb-1">
-                            <img src={`http://localhost:5000/assets/avater/${userImgURL}`} className="w-8 h-8 rounded-full object-cover" />
+                            <img src={`${baseURL}/assets/avater/${userImgURL}`} className="w-8 h-8 rounded-full object-cover" />
                             <div>
                                 <h5 className="text-[15px] font-medium leading-5 text-[#050505]">{userName}</h5>
                                 <p className="text-[13px] font-normal leading-5 text-[#65676b]">{postTime === "a minute ago" ? "1 minute ago" : postTime === "an hour ago" ? "1 hour ago" : postTime === "a day ago" ? "1 day ago" : postTime === "a month ago" ? "1 month ago" : postTime === "a year ago" ? "1 year ago" : postTime}</p>
@@ -64,7 +64,7 @@ const Card = ({ post }) => {
 
                     <div className="card-indention">
                         <div className="px-0 lg:px-4">
-                            {postImgURL ? <img src={`http://localhost:5000/assets/usersPostImage/${postImgURL}`} className="card-img h-auto object-fill mb-3 w-auto h-auto" /> : ""}
+                            {postImgURL ? <img src={`${baseURL}/assets/usersPostImage/${postImgURL}`} className="card-img h-auto object-fill mb-3 w-auto h-auto" /> : ""}
                         </div>
 
 
@@ -72,7 +72,7 @@ const Card = ({ post }) => {
                             <div className="flex gap-2">
                                 <div onClick={() => handleLike(_id)} className="flex items-center gap-1 hover:bg-[#F2F2F2] px-3 py-1.5 rounded cursor-pointer">
                                     <BiLike className="text-xl" />
-                                    <span className="text-sm">{likes.length} {likes.length < 2 ? "Like" : "Likes"}</span>
+                                    <span className="text-sm">{likes?.length} {likes?.length < 2 ? "Like" : "Likes"}</span>
                                 </div>
 
                                 <div onClick={() => setToggleComment(!toggleComment)}

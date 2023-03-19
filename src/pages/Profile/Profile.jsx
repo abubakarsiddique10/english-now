@@ -5,6 +5,7 @@ import { MdOutlineCreate, MdLogout } from "react-icons/md";
 import { PrimaryButton } from "../../components/Button/Button";
 import { memo, useContext, useEffect, useState } from "react";
 import { AppContext } from "../../App";
+import baseURL from "../../api/api";
 
 const Profile = () => {
     const { setUser, user } = useContext(AppContext);
@@ -13,7 +14,7 @@ const Profile = () => {
 
     useEffect(() => {
         if (phoneNumber) {
-            fetch(`http://localhost:5000/api/v1/userPost/${phoneNumber}`)
+            fetch(`${baseURL}/api/v1/userPost/${phoneNumber}`)
                 .then(res => res.json())
                 .then(data => setPosts(data?.posts))
         }
@@ -36,7 +37,7 @@ const Profile = () => {
         <section>
             <div className="md:flex gap-5 px-2">
                 <div className="max-w-[300px] h-full top-0 md:sticky md:top-[80px] mx-auto md:mx-0 md:my-0 my-5 md:b-0">
-                    <img src={`http://localhost:5000/assets/avater/${user?.userImgURL}`} className="sm:max-w-[300px] sm:max-h-[300px] max-w-52 max-h-52 rounded-full object-cover mx-auto" />
+                    <img src={`${baseURL}/assets/avater/${user?.userImgURL}`} className="sm:max-w-[300px] sm:max-h-[300px] max-w-52 max-h-52 rounded-full object-cover mx-auto" />
                     <div >
                         <h5 className={`text-xl font-medium mt-4 text-center`}>{user?.userName}</h5>
                     </div>

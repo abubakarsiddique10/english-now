@@ -18,6 +18,7 @@ import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import RequireAuth from "../../Authentication/RequireAuth";
 import ProfileUpdate from "../Profile/ProfileUpdate";
+import MenuItem from "../../components/Header/MenuItem";
 
 
 
@@ -45,32 +46,10 @@ const Main = () => {
                                 <BsX className="text-3xl" />
                             </div>
                             <ul className="manu">
-                                <li>
-                                    <Link to="/" className="nav-link">
-                                        <img className="w-5 h-5" src={home} />
-                                        <span className="ml-3">Home</span>
-                                    </Link>
-                                </li>
-                                <li>
-                                    <Link to="/Vocabulary" className="nav-link">
-                                        <img className="w-5 h-5" src={vocabulary} />
-                                        <span className="ml-3">Vocabulary</span>
-                                    </Link>
-                                </li>
-                                {role === "admin_SRRS@b$e" && <li>
-                                    <Link to="/Dashboard" className="nav-link">
-                                        <img className="w-5 h-5" src={pattern} />
-                                        <span className="ml-3">Dashboard</span>
-                                    </Link>
-                                </li>}
-                                {/* {
-                                    pages.map((page, index) => <li key={index}>
-                                        <Link to={page.link} className="nav-link">
-                                            <img className="w-5 h-5" src={page.icon} />
-                                            <span className="ml-3">{page.name}</span>
-                                        </Link>
-                                    </li>)
-                                } */}
+                                <MenuItem name="Home" link="/" icon={home} />
+                                <MenuItem name="Vocabulary" link="/vocabulary" icon={vocabulary} />
+                                <MenuItem name="Story" link="/story" icon={story} />
+                                <MenuItem name="Dashboard" link="/dashboard" icon={story} />
                             </ul>
                         </div>
                     </aside>

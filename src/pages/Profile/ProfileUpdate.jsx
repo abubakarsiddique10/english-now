@@ -5,6 +5,7 @@ import 'react-phone-number-input/style.css'
 import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
+import baseURL from "../../api/api";
 
 const ProfileUpdate = () => {
     const { user, error, setUser } = useContext(AppContext);
@@ -27,7 +28,7 @@ const ProfileUpdate = () => {
         const formData = new FormData;
         formData.append('userName', value.userName);
         formData.append('imageURL', value.imageURL);
-        fetch(`http://localhost:5000/api/v1/user/updateProfile/${user.phoneNumber}`, {
+        fetch(`${baseURL}/api/v1/user/updateProfile/${user.phoneNumber}`, {
             method: "PATCH",
             body: formData,
         }).then(res => res.json())

@@ -7,6 +7,7 @@ import TextField from "../../components/Form/TextField"
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input"
 import { AppContext } from "../../App";
+import baseURL from "../../api/api";
 
 const Login = () => {
     const { user } = useContext(AppContext)
@@ -27,7 +28,7 @@ const Login = () => {
         let isValid = value.phoneNumber && isValidPhoneNumber(value.phoneNumber) ? true : false;
 
         if (isValid) {
-            fetch('http://localhost:5000/api/v1/user/login', {
+            fetch(`${baseURL}/api/v1/user/login`, {
                 method: "POST",
                 headers: {
                     'content-type': "application/json"
