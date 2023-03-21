@@ -19,7 +19,7 @@ const Header = () => {
                 <div className="flex justify-between items-center">
 
                     <div className="flex items-center gap-2">
-                        <FiMenu onClick={handleHamburger} className="text-lg md:hidden cursor-pointer" />
+                        <FiMenu onClick={handleHamburger} className="text-xl md:hidden cursor-pointer" />
                         <Link to="/" className="font-medium cap text-lg">English Now</Link>
                     </div>
 
@@ -28,8 +28,8 @@ const Header = () => {
                         {(pathName === "/" && user) && <PostButton handlePost={handlePost}>Create Post</PostButton>}
 
                         {user ?
-                            <Link to="/profile" className="w-9 h-9 p-[3px] rounded-full ring-2 ">
-                                <img className="rounded-full" src={`${baseURL}/assets/avater/${user?.userImgURL}`} alt="avatar" />
+                            <Link to="/profile" className=" flex items-center justify-center">
+                                <img className="w-9 h-9 rounded-full ring-2 p-[3px]" src={`${baseURL}/assets/avater/${user?.userImgURL}`} alt="avatar" />
                             </Link> : <Link to="/login"> <Button>Login</Button></Link>}
                     </div>
                 </div>
@@ -38,3 +38,4 @@ const Header = () => {
     )
 }
 export default memo(Header);
+

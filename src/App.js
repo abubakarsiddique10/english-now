@@ -3,6 +3,7 @@ import Header from "./components/Header/Header";
 import Main from "../src/pages/Main/Main";
 import Post from "./components/Post/Post";
 import useAuth from "./hooks/useAuth";
+import UserProvider from "./context/userProvider";
 export const AppContext = createContext(null)
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
       <AppContext.Provider value={{ ...provideValue }}>
         <div className={`${togglePost && "active"}`}>
           <Header />
-          <Main />
+          <UserProvider>
+            <Main />
+          </UserProvider>
         </div>
         <Post />
       </AppContext.Provider>

@@ -1,21 +1,29 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import Card from "../../components/Card/Card"
-import baseURL from "../../api/api";
+import { Loading } from "../../components/Loading/Loading";
+import { usePosts, } from "../../context/userProvider";
 
 
 const Home = () => {
-    const [posts, setPosts] = useState([]);
-    useEffect(() => {
-        fetch(`${baseURL}/api/v1/userPost`)
-            .then(res => res.json())
-            .then(data => setPosts(data?.posts))
-    }, []);
+    const { state: { loading, posts, error } } = usePosts();
+    let content;
+    if (loading) {
+        content = <Loading />
+    }
+    if (error) {
+        content = <p>Something erroe</p>
+    }
+    if (!loading && !error && posts.length) {
+        content = posts?.map(post => <Card key={post?._id} post={post} />)
+    }
+
+
+
+
     return (
-        <>
-            <div>
-                {posts?.map(post => <Card key={post?._id} post={post} />)}
-            </div>
-        </>
+        <div>
+            {content}
+        </div>
     )
 }
 export default Home

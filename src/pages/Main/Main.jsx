@@ -24,7 +24,7 @@ import MenuItem from "../../components/Header/MenuItem";
 
 const Main = () => {
     const { handleHamburger, toggleHamburger, user } = useContext(AppContext);
-    const role = user?.role
+
     const pages = [
         { name: "Home", link: "/", icon: home },
         { name: "Vocabulary", link: "/vocabulary", icon: vocabulary },

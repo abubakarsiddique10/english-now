@@ -26,6 +26,10 @@ font-family: 'Source Sans Pro', sans-serif; */
     height: 100vh;
 }
 
+.b {
+    background: linear-gradient(21deg, #10abff, #1beabd);
+}
+
 
 .v_card:hover .icon {
     transform: scale(1.1);
