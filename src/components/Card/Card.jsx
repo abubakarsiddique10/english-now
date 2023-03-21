@@ -67,10 +67,9 @@ const Card = ({ post }) => {
                             {postImgURL ? <img src={`${baseURL}/assets/usersPostImage/${postImgURL}`} className="card-img h-auto object-fill mb-3 w-auto h-auto" /> : ""}
                         </div>
 
-
-                        <div className="card-bottom flex justify-between mx-4 border-t py-1">
+                        <div className="card-bottom flex justify-between md:mx-4 border-t py-1">
                             <div className="flex gap-2">
-                                <div onClick={() => handleLike(_id)} className="flex items-center gap-1 hover:bg-[#F2F2F2] px-3 py-1.5 rounded cursor-pointer">
+                                <div onClick={() => handleLike(_id)} className="flex items-center gap-1 hover:bg-[#F2F2F2] px-4 md:px-3 py-1.5 rounded cursor-pointer">
                                     <BiLike className="text-xl" />
                                     <span className="text-sm">{likes?.length} {likes?.length < 2 ? "Like" : "Likes"}</span>
                                 </div>
