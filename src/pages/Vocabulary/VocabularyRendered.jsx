@@ -14,11 +14,14 @@ const VocabularyRendered = () => {
     useEffect(() => {
         AOS.init({ duration: 600 });
         const url = `${baseURL}/api/v1/vocabulary/${category}`
-
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const response = await fetch(url);
+                const response = await fetch(url, {
+                    headers: {
+                        authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                    }
+                });
                 const data = await response.json();
                 setVocabulary(data.data);
                 setLoading(false)

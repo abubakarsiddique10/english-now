@@ -1,8 +1,11 @@
-const Label = ({ label }) => {
+const Label = ({ label, text }) => {
     return (
-        <label className="block uppercase tracking-wide text-grey-darker text-xs font-black font-['Hind_Siliguri'] mb-2" htmlFor="grid-first-name">
-            {label}
-        </label>
+        <div className="mb-2 leading-[15px]">
+            <label className="block uppercase tracking-wide text-grey-darker text-xs font-black font-['Hind_Siliguri'] " htmlFor="grid-first-name">
+                {label}
+            </label>
+            <span className="text-xs leading-[1px]">{text}</span>
+        </div>
     )
 }
 export default Label;

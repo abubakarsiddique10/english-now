@@ -82,8 +82,9 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
         @apply border pl-3 mb-3 
     }
     .PhoneInput .PhoneInputInput {
-        @apply py-3 border-l pl-1 ml-1
+        @apply py-3 border-l pl-1 ml-1 w-full
     }
+    
 }
 
 @layer utilities {

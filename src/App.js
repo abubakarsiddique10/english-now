@@ -1,9 +1,15 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Header from "./components/Header/Header";
 import Main from "../src/pages/Main/Main";
 import Post from "./components/Post/Post";
 import useAuth from "./hooks/useAuth";
 import UserProvider from "./context/userProvider";
+
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
+
+
 export const AppContext = createContext(null)
 
 function App() {
@@ -19,7 +25,6 @@ function App() {
   }
   const provideValue = { handlePost, handleHamburger, setUser, setTogglePost, user, errror, togglePost, toggleHamburger }
 
-
   return (
     <>
       <AppContext.Provider value={{ ...provideValue }}>
@@ -30,6 +35,7 @@ function App() {
           </UserProvider>
         </div>
         <Post />
+        <ToastContainer />
       </AppContext.Provider>
     </>
   );

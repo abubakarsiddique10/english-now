@@ -49,7 +49,7 @@ const Card = ({ post }) => {
         <>
             <article className="card bg-white border rounded-md mb-2">
                 <div className="card-body">
-                    <div className="card-top p-4 pb-0">
+                    <div className="card-top px-3 md:p-4 pb-0">
                         <div className="flex flex-wrap items-top gap-2 mb-1">
                             <img src={`${baseURL}/assets/avater/${userImgURL}`} className="w-8 h-8 rounded-full object-cover" />
                             <div>

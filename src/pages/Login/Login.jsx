@@ -6,8 +6,10 @@ import Label from "../../components/Form/Label"
 import TextField from "../../components/Form/TextField"
 import 'react-phone-number-input/style.css'
 import { isValidPhoneNumber } from "react-phone-number-input"
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { AppContext } from "../../App";
 import baseURL from "../../api/api";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const { user } = useContext(AppContext)
@@ -17,6 +19,7 @@ const Login = () => {
     });
 
     const [error, setError] = useState('');
+    const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
 
     const handleChange = (e) => {
@@ -39,6 +42,7 @@ const Login = () => {
                     if (token) {
                         localStorage.setItem('accessToken', token);
                         setError("");
+                        toast.success('Login successful!')
                         navigate('/');
                         window.location.reload();
                     }
@@ -52,11 +56,10 @@ const Login = () => {
         }
     }
 
-
     return (
         <div className="h-screen flex justify-center items-center height">
-            <div className="w-full max-w-[500px] border px-2 md:p-10">
-                <h1 className="mb-10 login_title">Login</h1>
+            <div className="w-full max-w-[500px] border px-2 py-10 md:p-10">
+                <h1 className="mb-9 login_title">Login</h1>
                 <form onSubmit={handleFormSubmit}>
 
                     <div className="w-full pb-3">
@@ -71,22 +74,27 @@ const Login = () => {
 
                     <div className="w-full">
                         <Label label="Enter password" />
-                        <TextField
-                            handleChange={handleChange}
-                            placeholder="Password"
-                            type="password"
-                            value={value.password}
-                            required={true}
-                            name="password" />
+                        <div className="relative">
+                            <TextField
+                                handleChange={handleChange}
+                                placeholder="Password"
+                                type={showPassword ? "text" : "password"}
+                                value={value.password}
+                                required={true}
+                                name="password" />
+                            <button onClick={() => setShowPassword(!showPassword)} className="absolute top-2/4 translate-y-[-50%] right-3 cursor-pointer">
+                                {showPassword ? < IoEyeOutline /> : <IoEyeOffOutline />}
+                            </button>
+                        </div>
                     </div>
 
-                    {error && <span>{error}</span>}
+                    {error && <span className="text-red-500 block mb-1">{error}</span>}
 
                     <div className="text-center">
                         <Button width="full" type="submit">Login</Button>
                     </div>
                     <div className="mt-3 text-center">
-                        <span>Don't have account? please </span>
+                        <span>Don't have an account? </span>
                         <Link className="text-blue-500" to="/signup"> Sign up</Link>
                     </div>
                 </form>

@@ -38,7 +38,7 @@ const Main = () => {
 
     return (
         <main className={`w-full ${path === "/" ? "body-color" : "null"}`}>
-            <div className="md:container ">
+            <div className="w-full md:container">
                 <div className="flex md:gap-5">
                     <aside className={`sidebar z-50 ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
                         <div className="pr-14 md:pr-4 py-3 rounded relative">

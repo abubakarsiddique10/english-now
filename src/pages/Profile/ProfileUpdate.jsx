@@ -6,6 +6,7 @@ import { Button } from "../../components/Button/Button";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import baseURL from "../../api/api";
+import { toast } from "react-toastify";
 
 const ProfileUpdate = () => {
     const { user, error, setUser } = useContext(AppContext);
@@ -34,6 +35,7 @@ const ProfileUpdate = () => {
         }).then(res => res.json())
             .then(data => {
                 if (data.status) {
+                    toast.success('Profile updated successfully!')
                     navigate('/')
                     window.location.reload()
                 } else {
@@ -45,9 +47,9 @@ const ProfileUpdate = () => {
 
 
     return (
-        <div className="w-full h-screen flex justify-center items-center height">
-            <div className="w-[500px] border p-5">
-                <h1 className="mb-10">Edit your profile</h1>
+        <div className="h-screen flex justify-center items-center height">
+            <div className="w-full max-w-[500px] border px-2 py-10 md:p-10">
+                <h1 className="mb-10 text-center text-2xl font-medium">Edit your profile</h1>
                 <form onSubmit={handleProfileEdit}>
 
                     <div className="w-full">

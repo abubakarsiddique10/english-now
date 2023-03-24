@@ -14,7 +14,11 @@ const Profile = () => {
 
     useEffect(() => {
         if (phoneNumber) {
-            fetch(`${baseURL}/api/v1/userPost/${phoneNumber}`)
+            fetch(`${baseURL}/api/v1/userPost/${phoneNumber}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
                 .then(res => res.json())
                 .then(data => setPosts(data?.posts))
         }
@@ -35,7 +39,7 @@ const Profile = () => {
 
     return (
         <section>
-            <div className="md:flex gap-5 px-2">
+            <div className="md:flex gap-5">
                 <div className="max-w-[300px] h-full top-0 md:sticky md:top-[80px] mx-auto md:mx-0 md:my-0 my-5 md:b-0">
                     <img src={`${baseURL}/assets/avater/${user?.userImgURL}`} className="sm:max-w-[300px] sm:max-h-[300px] max-w-52 max-h-52 rounded-full object-cover mx-auto" />
                     <div >
@@ -48,7 +52,7 @@ const Profile = () => {
                     </div>
                 </div>
                 <div className="flex-1">
-                    {posts.map(post => <Card key={post?._id} post={post} />)}
+                    {posts?.map(post => <Card key={post?._id} post={post} />)}
                 </div>
             </div>
         </section>
