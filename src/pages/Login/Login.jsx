@@ -72,7 +72,7 @@ const Login = () => {
                             onChange={e => setValue({ ...value, phoneNumber: e })} />
                     </div>
 
-                    <div className="w-full">
+                    <div className="w-full pb-6">
                         <Label label="Enter password" />
                         <div className="relative">
                             <TextField
@@ -82,11 +82,15 @@ const Login = () => {
                                 value={value.password}
                                 required={true}
                                 name="password" />
-                            <button onClick={() => setShowPassword(!showPassword)} className="absolute top-2/4 translate-y-[-50%] right-3 cursor-pointer">
+                            <span onClick={() => setShowPassword(!showPassword)} className="absolute top-2/4 translate-y-[-50%] right-3 cursor-pointer">
                                 {showPassword ? < IoEyeOutline /> : <IoEyeOffOutline />}
-                            </button>
+                            </span>
+
+                            <Link to="/resetPaasword" className="absolute bottom-[-35px] right-0">Forgot Password</Link>
                         </div>
                     </div>
+
+
 
                     {error && <span className="text-red-500 block mb-1">{error}</span>}
 

@@ -19,6 +19,8 @@ import Profile from "../Profile/Profile";
 import RequireAuth from "../../Authentication/RequireAuth";
 import ProfileUpdate from "../Profile/ProfileUpdate";
 import MenuItem from "../../components/Header/MenuItem";
+import ResetPaasword from "../Login/ResetPaasword";
+import NewPassword from "../Login/NewPassword";
 
 
 
@@ -67,6 +69,8 @@ const Main = () => {
                             <Route path="/post" element={<Post />} />
                             <Route path="/signup" element={<SignUp />} />
                             <Route path="/login" element={<Login />} />
+                            <Route path="/resetPaasword" element={<ResetPaasword />} />
+                            <Route path="/newPassword/:phoneNumber" element={<NewPassword />} />
                             <Route path="/profile" element={<RequireAuth>
                                 <Profile />
                             </RequireAuth>} />

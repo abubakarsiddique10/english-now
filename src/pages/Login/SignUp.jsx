@@ -44,29 +44,34 @@ const SignUp = () => {
         if (!isValid) return setError('number is not valid');
         if (value.password.length < 5) return setError('password must be at least 5 characters');
 
-        const checkUser = await fetch(`${baseURL}/api/v1/user/checkUser/${value.phoneNumber}`)
+
+        const isExist = await fetch(`${baseURL}/api/v1/user/isUserExist/${value.phoneNumber}`)
             .then(res => res.json())
             .then(data => {
-                if (!data.status) {
-                    return data.status
+                if (data.status) {
+                    return true
                 } else {
-                    return data.status
+                    return false
                 }
-            });
-        if (checkUser) {
+            }).catch(error => console.log(error))
+
+        if (isExist) {
             return setError('This number is already registered')
-        }
+        } else (setError(""))
 
         try {
             setError('');
             const response = await recaptha(value.phoneNumber);
             setResult(response);
+            console.log(response)
             toast.success('OTP sent successfully', {
                 autoClose: 10000,
             })
         } catch (error) {
+            console.log(error)
         }
     }
+
 
     const handleVerifyOTP = async (e) => {
         e.preventDefault();
@@ -121,7 +126,7 @@ const SignUp = () => {
                             <div id="recaptcha-container" />
 
                             <div className="w-full mb-6">
-                                <Label label="Your mobile number" text="You can't change your number later. please save your number." />
+                                <Label label="Your mobile number" />
                                 <PhoneInput
                                     international
                                     defaultCountry="BD"
@@ -131,7 +136,7 @@ const SignUp = () => {
                             </div>
 
                             <div className="w-full ">
-                                <Label label="Enter password" text="You can't change your password later. please save your password." />
+                                <Label label="Enter password" />
                                 <div className="relative">
                                     <TextField
                                         handleChange={handleChange}
@@ -140,12 +145,14 @@ const SignUp = () => {
                                         required={true}
                                         value={value.password}
                                         name="password" />
-                                    <button onClick={() => setShowPassword(!showPassword)} className="absolute top-2/4 translate-y-[-50%] right-3 cursor-pointer">
+                                    <span onClick={() => setShowPassword(!showPassword)} className="absolute top-2/4 translate-y-[-50%] right-3 cursor-pointer">
                                         {showPassword ? < IoEyeOutline /> : <IoEyeOffOutline />}
-                                    </button>
+                                    </span>
                                 </div>
                             </div>
-                            {error ? <p>{error}</p> : ""}
+
+                            {error ? <p className="text-red-500">{error}</p> : ""}
+
                             <div className="text-center">
                                 <Button width="full" type="submit">Sign Up</Button>
                             </div>
@@ -170,3 +177,5 @@ const SignUp = () => {
     )
 }
 export default SignUp
+
+//text="You can't change your password later. please save your password.
