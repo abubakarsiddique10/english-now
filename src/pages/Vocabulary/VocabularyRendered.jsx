@@ -6,14 +6,17 @@ import image from "../../assets/others/Bust2.png"
 import baseURL from "../../api/api";
 import { Loading, LoadingTwo } from "../../components/Loading/Loading";
 
+
 const VocabularyRendered = () => {
     const [vocabulary, setVocabulary] = useState([]);
     const [loading, setLoading] = useState(false)
     const { category } = useParams();
 
+
     useEffect(() => {
         AOS.init({ duration: 600 });
         const url = `${baseURL}/api/v1/vocabulary/${category}`
+        console.log(url)
         const fetchData = async () => {
             try {
                 setLoading(true)

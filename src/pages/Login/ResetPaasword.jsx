@@ -5,6 +5,7 @@ import { isValidPhoneNumber } from "react-phone-number-input"
 import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import baseURL from "../../api/api"
+import { Avatar } from "../../components/Avatar/Avatar"
 import { Button } from "../../components/Button/Button"
 import Label from "../../components/Form/Label"
 import auth from "../../firebase.init"
@@ -72,7 +73,10 @@ const ResetPaasword = () => {
         <div className="height flex flex-col justify-center items-center">
             <div className="w-full max-w-[500px] border px-2 py-10 md:p-10">
                 {!result ? <>
-                    <h1 className="mb-8 text-center text-2xl font-medium">Reset your paasword</h1>
+                    <div>
+                        <Avatar />
+                        <h3 className="section-title">Reset your paasword</h3>
+                    </div>
                     <form onSubmit={handleFormSubmit}>
 
                         <div id="recaptcha-container"></div>
@@ -94,11 +98,12 @@ const ResetPaasword = () => {
                     </form>
                 </> : <div className="mt-5">
                     <div className="mb-5 text-center">
-                        <h1 className="text-3xl mb-1 login_title">Verification Code</h1>
-                        <span className="text-sm">Please enter the OTP sent to your phone number</span>
+                        <Avatar />
+                        <h3 className="section-title">Verification Code</h3>
                     </div>
                     <form onSubmit={handleVerifyOTP}>
-                        <input onChange={e => setOtp(e.target.value)} type="text" placeholder="Enter otp" className="border p-2 w-full mb-4" name="otp" value={otp} />
+                        <p className="text-sm mb-2">Please enter the OTP sent to your phone number</p>
+                        <input onChange={e => setOtp(e.target.value)} type="text" placeholder="Enter otp" className="border p-2 w-full mb-6" name="otp" value={otp} />
                         <Button width="full" type="submit">Submit</Button>
                     </form>
                 </div>}
@@ -107,3 +112,7 @@ const ResetPaasword = () => {
     )
 }
 export default ResetPaasword
+
+//<a href="https://storyset.com/user">User illustrations by Storyset</a>
+
+// otp <a href="https://storyset.com/user">User illustrations by Storyset</a>

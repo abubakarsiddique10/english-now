@@ -10,9 +10,12 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { AppContext } from "../../App";
 import baseURL from "../../api/api";
 import { toast } from "react-toastify";
+import { Avatar } from "../../components/Avatar/Avatar";
+import { SubLoading } from "../../components/Loading/Loading";
 
 const Login = () => {
-    const { user } = useContext(AppContext)
+    const { user } = useContext(AppContext);
+    const [loading, setLoading] = useState(false)
     const [value, setValue] = useState({
         phoneNumber: "",
         password: "",
@@ -31,6 +34,7 @@ const Login = () => {
         let isValid = value.phoneNumber && isValidPhoneNumber(value.phoneNumber) ? true : false;
 
         if (isValid) {
+            setLoading(true)
             fetch(`${baseURL}/api/v1/user/login`, {
                 method: "POST",
                 headers: {
@@ -40,6 +44,7 @@ const Login = () => {
             }).then(res => res.json())
                 .then(({ token, error }) => {
                     if (token) {
+                        setLoading(false)
                         localStorage.setItem('accessToken', token);
                         setError("");
                         toast.success('Login successful!')
@@ -47,7 +52,8 @@ const Login = () => {
                         window.location.reload();
                     }
                     else if (error) {
-                        setError(error)
+                        setError(error);
+                        setLoading(false)
                     }
                 })
         }
@@ -59,7 +65,10 @@ const Login = () => {
     return (
         <div className="h-screen flex justify-center items-center height">
             <div className="w-full max-w-[500px] border px-2 py-10 md:p-10">
-                <h1 className="mb-9 login_title">Login</h1>
+                <div>
+                    <Avatar />
+                    <h3 className="section-title">Login</h3>
+                </div>
                 <form onSubmit={handleFormSubmit}>
 
                     <div className="w-full pb-3">
@@ -95,7 +104,7 @@ const Login = () => {
                     {error && <span className="text-red-500 block mb-1">{error}</span>}
 
                     <div className="text-center">
-                        <Button width="full" type="submit">Login</Button>
+                        <Button loading={loading} width="full" type="submit">{loading ? <SubLoading /> : "Login"}</Button>
                     </div>
                     <div className="mt-3 text-center">
                         <span>Don't have an account? </span>
@@ -108,3 +117,5 @@ const Login = () => {
     )
 }
 export default Login
+
+//<a href="https://storyset.com/user">User illustrations by Storyset</a>

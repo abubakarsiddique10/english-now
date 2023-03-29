@@ -25,6 +25,8 @@ function App() {
   }
   const provideValue = { handlePost, handleHamburger, setUser, setTogglePost, user, errror, togglePost, toggleHamburger }
 
+
+
   return (
     <>
       <AppContext.Provider value={{ ...provideValue }}>

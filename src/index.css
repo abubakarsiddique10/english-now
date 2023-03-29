@@ -67,8 +67,11 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
     .sidebar {
         @apply flex-1 md:height fixed top-0 h-screen bg-white md:bg-inherit md:sticky md:top-[67px] w-full max-w-[250px] lg:max-w-[300px] border-r transition-all ease-in duration-500 left-[-300px]
     }
-    .login_title {
-        @apply text-center text-4xl font-bold font-['Hind_Siliguri']
+    .section-title {
+         @apply text-center text-4xl font-bold mb-10 font-['Hind_Siliguri']
+    }
+    .section-img {
+        @apply w-24 h-24 p-2 rounded-full ring-2 object-cover mx-auto mb-2
     }
 
     /* card css */

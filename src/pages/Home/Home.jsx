@@ -13,7 +13,7 @@ const Home = () => {
     if (error) {
         content = <p>Something erroe</p>
     }
-    if (!loading && !error && posts.length) {
+    if (!loading && !error && posts?.length) {
         content = posts?.map(post => <Card key={post?._id} post={post} />)
     }
 

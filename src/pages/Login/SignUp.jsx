@@ -11,6 +11,8 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import auth from "../../firebase.init";
 import baseURL from "../../api/api";
 import { toast } from "react-toastify";
+import { Avatar } from "../../components/Avatar/Avatar";
+import { SubLoading } from "../../components/Loading/Loading";
 
 const SignUp = () => {
     const [value, setValue] = useState({
@@ -22,7 +24,8 @@ const SignUp = () => {
     const [result, setResult] = useState("");
     const [otp, setOtp] = useState("");
     const [error, setError] = useState("");
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -60,14 +63,17 @@ const SignUp = () => {
         } else (setError(""))
 
         try {
+            setLoading(true)
             setError('');
             const response = await recaptha(value.phoneNumber);
             setResult(response);
-            console.log(response)
+            console.log(response);
+            setLoading(false)
             toast.success('OTP sent successfully', {
                 autoClose: 10000,
             })
         } catch (error) {
+            setLoading(false)
             console.log(error)
         }
     }
@@ -107,10 +113,13 @@ const SignUp = () => {
 
     return (
         <div className="h-screen flex justify-center items-center height">
-            <div className="w-full max-w-[500px] border px-2 py-10 md:p-10">
+            <div className="w-full max-w-[550px] border px-2 py-10 md:p-10">
                 {!result ?
                     <>
-                        <h1 className="mb-10 login_title">SignUp</h1>
+                        <div>
+                            <Avatar />
+                            <h3 className="section-title">Sign Up</h3>
+                        </div>
                         <form onSubmit={handleFormSubmit}>
                             <div className="w-full">
                                 <Label label="Your name" />
@@ -154,7 +163,7 @@ const SignUp = () => {
                             {error ? <p className="text-red-500">{error}</p> : ""}
 
                             <div className="text-center">
-                                <Button width="full" type="submit">Sign Up</Button>
+                                <Button loading={loading} width="full" type="submit" >{loading ? <SubLoading /> : "Sign Up"}  </Button>
                             </div>
                             <div className="mt-3 text-center">
                                 <span>Already have an acount?</span>
@@ -164,12 +173,15 @@ const SignUp = () => {
                     </> :
                     <div className="mt-5">
                         <div className="mb-5 text-center">
-                            <h1 className="text-3xl mb-1 login_title">Verification Code</h1>
-                            <span className="text-sm">Please enter the OTP sent to your phone number</span>
+                            <Avatar />
+                            <h3 className="section-title">Verification Code</h3>
                         </div>
                         <form onSubmit={handleVerifyOTP}>
-                            <input onChange={e => setOtp(e.target.value)} type="text" placeholder="Enter otp" className="border p-2 w-full mb-4" name="otp" value={otp} />
-                            <Button width="full" type="submit">Submit</Button>
+                            <p className="text-sm mb-2">Please enter the OTP sent to your phone number</p>
+                            <input onChange={e => setOtp(e.target.value)} type="text" placeholder="Enter otp" className="border p-2 w-full mb-6" name="otp" value={otp} />
+                            <Button width="full" type="submit">
+                                Submit
+                            </Button>
                         </form>
                     </div>}
             </div>
@@ -179,3 +191,5 @@ const SignUp = () => {
 export default SignUp
 
 //text="You can't change your password later. please save your password.
+
+// <a href="https://storyset.com/user">User illustrations by Storyset</a>
