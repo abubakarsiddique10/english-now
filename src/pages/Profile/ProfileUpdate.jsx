@@ -9,7 +9,8 @@ import baseURL from "../../api/api";
 import { toast } from "react-toastify";
 
 const ProfileUpdate = () => {
-    const { user, error, setUser } = useContext(AppContext);
+    const { user, setUser } = useContext(AppContext);
+    const [error, setError] = useState("");
     const navigate = useNavigate()
     const [value, setValue] = useState({
         userName: "",
@@ -26,6 +27,9 @@ const ProfileUpdate = () => {
 
     const handleProfileEdit = (e) => {
         e.preventDefault();
+
+        if (value.userName.length < 3) return setError('name must be at least 3 characters');
+
         const formData = new FormData;
         formData.append('userName', value.userName);
         formData.append('imageURL', value.imageURL);
@@ -61,7 +65,10 @@ const ProfileUpdate = () => {
                             required={false}
                             value={value.userName}
                             name="userName" />
+                        {error ? <p className="text-red-500 text-sm">{error}</p> : ""}
                     </div>
+
+
 
                     <div className="w-full">
                         <Label label="Enter Image" />
