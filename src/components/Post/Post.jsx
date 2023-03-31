@@ -4,6 +4,7 @@ import { AppContext } from "../../App"
 import { GrGallery } from "react-icons/gr";
 import Textarea from "../Form/Textarea";
 import baseURL from "../../api/api";
+import { toast } from "react-toastify";
 
 
 const Post = () => {
@@ -33,12 +34,18 @@ const Post = () => {
         }).then((res) => res.json())
             .then(data => {
                 if (data.status) {
-                    console.log(data)
                     setTogglePost(!togglePost)
+                } else if (data.error.includes('File too large')) {
+                    toast.error("file must be less than 500 KB", {
+                        autoClose: 10000,
+                    })
+                } else {
+                    toast.error(data.error, {
+                        autoClose: 10000,
+                    })
                 }
             })
     }
-
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
     }

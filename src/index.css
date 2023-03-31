@@ -59,7 +59,6 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
     .sub_title {
         @apply font-bold leading-6 text-xl font-['Hind_Siliguri'] text-[#363637]
     }
-
     .hamburger {
         @apply md:hidden w-8 h-8 flex items-center justify-center 
         hover:bg-gray-200 rounded-full absolute top-4 right-4
@@ -71,7 +70,10 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
          @apply text-center text-4xl font-bold mb-10 font-['Hind_Siliguri']
     }
     .section-img {
-        @apply w-24 h-24 p-2 rounded-full ring-2 object-cover mx-auto mb-2
+        @apply  object-cover max-w-[90px] h-auto mx-auto
+    }
+    .nav-icon {
+        @apply text-[#2563EB] text-xl
     }
 
     /* card css */

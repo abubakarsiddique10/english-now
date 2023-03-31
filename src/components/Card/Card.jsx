@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import { FaRegCommentDots } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
 import { BsBookmarkHeart } from "react-icons/bs";
@@ -6,6 +7,7 @@ import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Comment from "./Comment";
 import baseURL from "../../api/api";
+
 
 const Card = ({ post }) => {
     const { userName, createdAt, description, postImgURL, userImgURL, _id, comments, likes } = post;
@@ -17,6 +19,7 @@ const Card = ({ post }) => {
     const name = user?.userName;
     const userImg = user?.userImgURL;
     const id = user?._id;
+    const navigate = useNavigate()
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
@@ -33,17 +36,19 @@ const Card = ({ post }) => {
                         setToggleComment(!toggleComment)
                     }
                 })
-        }
+        } else { navigate('/login') }
     }
     const handleLike = () => {
-        fetch(`${baseURL}/api/v1/userPost/like/${_id}`, {
-            method: "PATCH",
-            headers: {
-                'content-type': "application/json"
-            },
-            body: JSON.stringify({ userId: id })
-        }).then(res => res.json())
-            .then(data => data)
+        if (user) {
+            fetch(`${baseURL}/api/v1/userPost/like/${_id}`, {
+                method: "PATCH",
+                headers: {
+                    'content-type': "application/json"
+                },
+                body: JSON.stringify({ userId: id })
+            }).then(res => res.json())
+                .then(data => data)
+        } else { navigate('/login') }
     }
     return (
         <>
@@ -86,7 +91,7 @@ const Card = ({ post }) => {
                             </div> */}
                         </div >
                         <div className={`${toggleComment ? "block" : "hidden"}`}>
-                            <form onSubmit={handleSubmitForm} className={`mx-4 px-3 flex items-center gap-2 mb-2 ${user ? "block" : "hidden"}`}>
+                            <form onSubmit={handleSubmitForm} className={`mx-4 px-3 flex items-center gap-2 mb-2 `}>
                                 <input
                                     onChange={(e) => setComment(e.target.value)}
                                     className={`appearance-none block w-full text-grey-darker text-sm py-1 focus:outline-none px-4 bg-gray-100 rounded-full`}

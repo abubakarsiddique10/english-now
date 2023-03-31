@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../App";
 import baseURL from "../../api/api";
 import { toast } from "react-toastify";
+import Error from "../../components/Error/Error";
 
 const ProfileUpdate = () => {
     const { user, setUser } = useContext(AppContext);
@@ -28,11 +29,16 @@ const ProfileUpdate = () => {
     const handleProfileEdit = (e) => {
         e.preventDefault();
 
-        if (value.userName.length < 3) return setError('name must be at least 3 characters');
 
+        if (!value.userName) {
+        } else if (value.userName.length < 3) {
+            return setError('name must be at least 3 characters');
+        }
         const formData = new FormData;
         formData.append('userName', value.userName);
         formData.append('imageURL', value.imageURL);
+
+
         fetch(`${baseURL}/api/v1/user/updateProfile/${user.phoneNumber}`, {
             method: "PATCH",
             body: formData,
@@ -42,7 +48,14 @@ const ProfileUpdate = () => {
                     toast.success('Profile updated successfully!')
                     navigate('/')
                     window.location.reload()
+                } else if (data.error.includes('File too large')) {
+                    toast.error("file must be less than 500 KB", {
+                        autoClose: 10000,
+                    })
                 } else {
+                    toast.error(data.error, {
+                        autoClose: 10000,
+                    })
                 }
             })
             .catch((error) => {
@@ -56,7 +69,7 @@ const ProfileUpdate = () => {
                 <h1 className="mb-10 text-center text-2xl font-medium">Edit your profile</h1>
                 <form onSubmit={handleProfileEdit}>
 
-                    <div className="w-full">
+                    <div className="w-full relative">
                         <Label label="Enter your name" />
                         <TextField
                             handleChange={handleChange}
@@ -65,10 +78,10 @@ const ProfileUpdate = () => {
                             required={false}
                             value={value.userName}
                             name="userName" />
-                        {error ? <p className="text-red-500 text-sm">{error}</p> : ""}
+
+                        {error && <Error error={error} />}
+
                     </div>
-
-
 
                     <div className="w-full">
                         <Label label="Enter Image" />
@@ -83,8 +96,8 @@ const ProfileUpdate = () => {
                     <div className="text-center">
                         <Button width="full" type="submit">submit</Button>
                     </div>
-                </form>
 
+                </form>
             </div>
         </div>
     )

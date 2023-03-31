@@ -8,15 +8,7 @@ import Textarea from "../../components/Form/Textarea";
 import TextField from "../../components/Form/TextField";
 import { categories } from "../Vocabulary/categories";
 
-/* setValue({
-                       word: "",
-                       meaning: "",
-                       image: "",
-                       category: "",
-                       sentence: "",
-                       synonym: [],
-                       antonym: [],
-                   }) */
+
 
 const AddVocabulary = () => {
     const [value, setValue] = useState({
@@ -64,7 +56,16 @@ const AddVocabulary = () => {
             .then(data => data.json())
             .then(data => {
                 if (data.status) {
-                    toast.success(data.message)
+                    toast.success(data.message);
+                    setValue({
+                        word: "",
+                        meaning: "",
+                        image: "",
+                        category: "",
+                        sentence: "",
+                        synonym: [],
+                        antonym: [],
+                    })
                 } else {
                     toast.error(data.error)
                 }

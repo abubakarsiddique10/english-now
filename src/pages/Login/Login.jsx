@@ -64,7 +64,7 @@ const Login = () => {
 
     return (
         <div className="h-screen flex justify-center items-center height">
-            <div className="w-full max-w-[500px] border px-2 py-10 md:p-10">
+            <div className="w-full max-w-[550px] border px-2 py-10 md:p-10">
                 <div>
                     <Avatar />
                     <h3 className="section-title">Login</h3>

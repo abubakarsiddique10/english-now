@@ -21,14 +21,16 @@ import ProfileUpdate from "../Profile/ProfileUpdate";
 import MenuItem from "../../components/Header/MenuItem";
 import ResetPaasword from "../Login/ResetPaasword";
 import NewPassword from "../Login/NewPassword";
-
-
+import { AiFillHome } from "react-icons/ai";
+import { FaBook } from "react-icons/fa";
+import { SiStorybook } from "react-icons/si";
+import { RiDashboardFill, RiBookFill } from "react-icons/ri";
 
 const Main = () => {
     const { handleHamburger, toggleHamburger, user } = useContext(AppContext);
 
     const pages = [
-        { name: "Home", link: "/", icon: home },
+        { name: "Home", link: "/", },
         { name: "Vocabulary", link: "/vocabulary", icon: vocabulary },
         { name: "Story", link: "/story", icon: story },
         { name: "Pattern", link: "/pattern", icon: pattern },
@@ -48,10 +50,10 @@ const Main = () => {
                                 <BsX className="text-3xl" />
                             </div>
                             <ul className="manu">
-                                <MenuItem name="Home" link="/" icon={home} />
-                                <MenuItem name="Vocabulary" link="/vocabulary" icon={vocabulary} />
-                                <MenuItem name="Story" link="/story" icon={story} />
-                                <MenuItem name="Dashboard" link="/dashboard" icon={story} />
+                                <MenuItem name="Home" link="/" icon={< AiFillHome className="nav-icon" />} />
+                                <MenuItem name="Vocabulary" link="/vocabulary" icon={<RiBookFill className="nav-icon" />} />
+                                <MenuItem name="Story" link="/story" icon={<SiStorybook className="nav-icon" />} />
+                                <MenuItem name="Dashboard" link="/dashboard" icon={<RiDashboardFill className="nav-icon" />} />
                             </ul>
                         </div>
                     </aside>
