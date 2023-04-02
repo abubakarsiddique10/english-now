@@ -9,11 +9,11 @@ module.exports = {
       padding: "15px"
     },
     screens: {
+      "xs": "250px",
       "sm": "450px",
       'md': '640px',
       'lg': '768px',
       'xl': '1024px',
-      /* 'xl': '1200px', */
     },
     extend: {},
   },

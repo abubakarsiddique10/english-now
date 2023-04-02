@@ -23,7 +23,7 @@ const VocabularyCategory = () => {
                 <h1 className="main-title" >Categories of vocabulary</h1>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-11">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 mt-11">
                 {
                     categories.map((item, index) => <div key={index} className="flex items-center gap-1.5 cursor-pointer v_card px-2 md:pl-1">
                         <div className={`w-[50px] h-[50px] flex items-center justify-center rounded`}>

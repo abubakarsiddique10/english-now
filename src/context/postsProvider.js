@@ -1,12 +1,12 @@
 import baseURL from "../api/api";
 import { fetchError, fetchStart, fetchSuccess } from "../state/actionCreators/postAction";
-const { createContext, useReducer, useEffect, useContext } = require("react");
+const { createContext, useReducer, useEffect, useContext, useState } = require("react");
 const { userReducer, initialState } = require("../state/reducers/userReducer");
 
 
-export const UserContext = createContext(null);
+export const PostsContext = createContext(null);
 
-const UserProvider = ({ children }) => {
+const PostsProvider = ({ children }) => {
     const [state, dispatch] = useReducer(userReducer, initialState);
 
     useEffect(() => {
@@ -24,16 +24,15 @@ const UserProvider = ({ children }) => {
         fetchData()
     }, [])
 
-
     const value = { state, dispatch }
-    return <UserContext.Provider value={value}>
+    return <PostsContext.Provider value={value}>
         {children}
-    </UserContext.Provider>
+    </PostsContext.Provider>
 }
 
 export const usePosts = () => {
-    const posts = useContext(UserContext);
+    const posts = useContext(PostsContext);
     return posts
 }
 
-export default UserProvider;
+export default PostsProvider;

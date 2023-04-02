@@ -3,7 +3,7 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
 import { BsBookmarkHeart } from "react-icons/bs";
 import moment from "moment";
-import { useState } from "react";
+import { memo, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Comment from "./Comment";
 import baseURL from "../../api/api";
@@ -20,6 +20,7 @@ const Card = ({ post }) => {
     const userImg = user?.userImgURL;
     const id = user?._id;
     const navigate = useNavigate()
+
 
     const handleSubmitForm = (e) => {
         e.preventDefault();
@@ -111,4 +112,4 @@ const Card = ({ post }) => {
         </>
     )
 }
-export default Card;
+export default memo(Card);

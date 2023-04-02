@@ -1,4 +1,4 @@
-const baseURL = "https://english-now-server.onrender.com";
+const baseURL = "http://localhost:5000";
 export default baseURL
 
 //https://english-now-server.vercel.app

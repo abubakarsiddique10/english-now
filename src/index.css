@@ -60,11 +60,16 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
         @apply font-bold leading-6 text-xl font-['Hind_Siliguri'] text-[#363637]
     }
     .hamburger {
-        @apply md:hidden w-8 h-8 flex items-center justify-center 
-        hover:bg-gray-200 rounded-full absolute top-4 right-4
+        @apply text-3xl md:hidden w-8 h-8 flex items-center justify-center hover:bg-gray-200 rounded-full absolute top-4 right-4
+    }
+    .hamburger-menu {
+        @apply fixed top-0 w-full max-w-[200px] bg-white h-full transition-all ease-in duration-500 pr-14 md:pr-4 py-3 rounded border md:hidden
+    }
+    .profile-menu {
+        @apply absolute top-[58px] right-0 w-[200px] bg-[#F8FAFB] border py-1.5 
     }
     .sidebar {
-        @apply flex-1 md:height fixed top-0 h-screen bg-white md:bg-inherit md:sticky md:top-[67px] w-full max-w-[250px] lg:max-w-[300px] border-r transition-all ease-in duration-500 left-[-300px]
+        @apply height flex-1 h-screen bg-inherit sticky top-[67px] w-full max-w-[300px] border-r 
     }
     .section-title {
          @apply text-center text-4xl font-bold mb-10 font-['Hind_Siliguri']

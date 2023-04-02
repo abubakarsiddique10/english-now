@@ -1,42 +1,23 @@
-import { BsX } from "react-icons/bs";
-import { Link, NavLink, Route, Routes, useLocation } from "react-router-dom";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 import Home from "../Home/Home";
 import Vocabulary from "../Vocabulary/Vocabulary";
-import home from "../../assets/icons/home.png";
-import vocabulary from "../../assets/icons/dictionary.png";
-import pattern from "../../assets/icons/pattern.png";
-import story from "../../assets/icons/book.png";
 import VocabularyRendered from "../Vocabulary/VocabularyRendered";
 import VocabularyCategory from "../Vocabulary/VocabularyCategory";
 import Dashboard from "../dashboard/Dashboard";
 import AddVocabulary from "../dashboard/AddVocabulary";
 import Post from "../../components/Post/Post";
-import { useContext } from "react";
-import { AppContext } from "../../App";
 import SignUp from "../Login/SignUp";
 import Login from "../Login/Login";
 import Profile from "../Profile/Profile";
 import RequireAuth from "../../Authentication/RequireAuth";
 import ProfileUpdate from "../Profile/ProfileUpdate";
-import MenuItem from "../../components/Header/MenuItem";
 import ResetPaasword from "../Login/ResetPaasword";
 import NewPassword from "../Login/NewPassword";
-import { AiFillHome } from "react-icons/ai";
-import { FaBook } from "react-icons/fa";
-import { SiStorybook } from "react-icons/si";
-import { RiDashboardFill, RiBookFill } from "react-icons/ri";
+import { pages } from "../../components/Header/menuItems";
+import PostForm from "../../components/Post/PostForm";
+
 
 const Main = () => {
-    const { handleHamburger, toggleHamburger, user } = useContext(AppContext);
-
-    const pages = [
-        { name: "Home", link: "/", },
-        { name: "Vocabulary", link: "/vocabulary", icon: vocabulary },
-        { name: "Story", link: "/story", icon: story },
-        { name: "Pattern", link: "/pattern", icon: pattern },
-        { name: "Dashboard", link: "/Dashboard", icon: pattern },
-    ]
-
     const location = useLocation();
     const path = location.pathname;
 
@@ -44,18 +25,15 @@ const Main = () => {
         <main className={`w-full ${path === "/" ? "body-color" : "null"}`}>
             <div className="w-full md:container">
                 <div className="flex md:gap-5">
-                    <aside className={`sidebar z-50 ${toggleHamburger ? "left-0" : "left-[-300px]"} ${path === "/" ? "block" : "md:hidden"}`} aria-label="Sidebar">
-                        <div className="pr-14 md:pr-4 py-3 rounded relative">
-                            <div onClick={handleHamburger} className="hamburger">
-                                <BsX className="text-3xl" />
-                            </div>
-                            <ul className="manu">
-                                <MenuItem name="Home" link="/" icon={< AiFillHome className="nav-icon" />} />
-                                <MenuItem name="Vocabulary" link="/vocabulary" icon={<RiBookFill className="nav-icon" />} />
-                                <MenuItem name="Story" link="/story" icon={<SiStorybook className="nav-icon" />} />
-                                <MenuItem name="Dashboard" link="/dashboard" icon={<RiDashboardFill className="nav-icon" />} />
-                            </ul>
-                        </div>
+                    <aside className={`sidebar z-40 hidden md:block ${path === "/" ? "block" : "md:hidden"}`}>
+                        <ul className="pr-4 py-3 rounded">
+                            {
+                                pages.map((page, index) => <li key={index} className="nav-link">
+                                    <page.icon className="text-xl" />
+                                    <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
+                                </li>)
+                            }
+                        </ul>
                     </aside>
 
                     <div className="mt-0 flex-1">
@@ -79,6 +57,7 @@ const Main = () => {
                             <Route path="/profileEdit" element={<RequireAuth>
                                 <ProfileUpdate />
                             </RequireAuth>} />
+                            <Route path="/postForm" element={<PostForm />} />
                         </Routes>
                     </div>
                 </div>

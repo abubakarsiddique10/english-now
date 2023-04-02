@@ -1,24 +1,22 @@
-import { useContext, useEffect, useState } from "react"
+import { memo } from "react"
 import Card from "../../components/Card/Card"
 import { Loading } from "../../components/Loading/Loading";
-import { usePosts, } from "../../context/userProvider";
+import { usePosts, } from "../../context/postsProvider";
 
 
 const Home = () => {
     const { state: { loading, posts, error } } = usePosts();
     let content;
+
     if (loading) {
         content = <Loading />
     }
     if (error) {
-        content = <p>Something erroe</p>
+        content = <p>Something was erroe</p>
     }
     if (!loading && !error && posts?.length) {
         content = posts?.map(post => <Card key={post?._id} post={post} />)
     }
-
-
-
 
     return (
         <div>
@@ -26,4 +24,4 @@ const Home = () => {
         </div>
     )
 }
-export default Home
+export default memo(Home)
