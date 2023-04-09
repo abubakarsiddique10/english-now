@@ -1,11 +1,12 @@
-import { memo } from "react"
+import { memo, useContext } from "react"
 import Card from "../../components/Card/Card"
 import { Loading } from "../../components/Loading/Loading";
-import { usePosts, } from "../../context/postsProvider";
+import PostsProvider, { PostsContext, usePosts } from "../../context/postsProvider";
+
 
 
 const Home = () => {
-    const { state: { loading, posts, error } } = usePosts();
+    const { state: { loading, posts, error } } = usePosts()
     let content;
 
     if (loading) {

@@ -7,12 +7,11 @@ import { AppContext } from "../../App";
 import baseURL from "../../api/api";
 import { pages, profilPages } from "./menuItems";
 import { MdLogout } from "react-icons/md";
-
-
+import useAuth from "../../hooks/useAuth";
 
 
 const Header = () => {
-    const { user, setUser } = useContext(AppContext);
+    const { user, setUser } = useAuth()
     const [toggle, setToggle] = useState(false);
     const [profileToggle, setProfileToggle] = useState(false);
     const navigate = useNavigate();
@@ -21,6 +20,7 @@ const Header = () => {
         localStorage.removeItem('accessToken');
         setUser(null)
         navigate('/');
+        window.location.reload();
     }
 
     return (
@@ -35,7 +35,7 @@ const Header = () => {
                             <ul className={`hamburger-menu ${toggle ? "left-0" : "left-[-200px]"}`}>
                                 {
                                     pages.map((page, index) => <li onClick={() => setToggle(!toggle)} key={index} className="nav-link">
-                                        <page.icon className="text-lg" />
+                                        <page.icon className="nav-icon" />
                                         <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
                                     </li>)
                                 }
@@ -43,7 +43,7 @@ const Header = () => {
                             </ul>
                         </div>
 
-                        <Link to="" className="font-medium text-lg">English Now</Link>
+                        <Link to="/" className="logo">English Now</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
@@ -53,7 +53,7 @@ const Header = () => {
 
                             <div className="relative">
                                 <Link onClick={() => setProfileToggle(!profileToggle)} className="flex items-center justify-center">
-                                    <img className="w-9 h-9 rounded-full ring-2 p-[3px]" src={`${baseURL}/assets/avater/${user?.userImgURL}`} alt="avatar" />
+                                    <img className="w-8 h-8 rounded-full ring-2 p-[3px]" src={`${baseURL}/assets/avater/${user?.userImgURL}`} alt="avatar" />
                                 </Link>
 
                                 <ul className={`profile-menu ${profileToggle ? "block" : "hidden"}`}>

@@ -8,9 +8,10 @@ export const pages = [
     { name: "Vocabulary", link: "/vocabulary", icon: RiBookFill },
     { name: "Story", link: "/story", icon: SiStorybook },
     { name: "Dashboard", link: "/Dashboard", icon: RiDashboardFill },
+    { name: "common", link: "/common", icon: RiDashboardFill },
 ]
 
 export const profilPages = [
     { name: "Create Post", link: "/postForm", },
-    { name: "Profile", link: "/profile", },
+    { name: "Profile", link: "/profile" },
 ]

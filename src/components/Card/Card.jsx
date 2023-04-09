@@ -3,10 +3,10 @@ import { FaRegCommentDots } from "react-icons/fa";
 import { BiLike } from "react-icons/bi";
 import { BsBookmarkHeart } from "react-icons/bs";
 import moment from "moment";
-import { memo, useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import { memo, useContext, useState } from "react";
 import Comment from "./Comment";
 import baseURL from "../../api/api";
+import { AppContext } from "../../App";
 
 
 const Card = ({ post }) => {
@@ -14,7 +14,7 @@ const Card = ({ post }) => {
     const [toggle, setToggle] = useState(false);
     const [toggleComment, setToggleComment] = useState(false);
     const [comment, setComment] = useState("");
-    const { user } = useAuth()
+    const { user } = useContext(AppContext)
     const postTime = moment(createdAt)?.fromNow();
     const name = user?.userName;
     const userImg = user?.userImgURL;

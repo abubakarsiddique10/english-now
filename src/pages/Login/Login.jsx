@@ -1,5 +1,5 @@
 import { useContext, useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import PhoneInput from 'react-phone-number-input'
 import { Button } from "../../components/Button/Button";
 import Label from "../../components/Form/Label"
@@ -12,10 +12,12 @@ import baseURL from "../../api/api";
 import { toast } from "react-toastify";
 import { Avatar } from "../../components/Avatar/Avatar";
 import { SubLoading } from "../../components/Loading/Loading";
+import useAuth from "../../hooks/useAuth";
+import { SiNeovim } from "react-icons/si";
 
 const Login = () => {
     const { user } = useContext(AppContext);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
     const [value, setValue] = useState({
         phoneNumber: "",
         password: "",
@@ -27,6 +29,13 @@ const Login = () => {
 
     const handleChange = (e) => {
         setValue({ ...value, [e.target.name]: e.target.value })
+    }
+
+    const location = useLocation()
+    let from = location.state?.from?.pathname || '/';
+
+    if (user) {
+        navigate(from, { replace: true });
     }
 
     const handleFormSubmit = (e) => {
@@ -47,8 +56,7 @@ const Login = () => {
                         setLoading(false)
                         localStorage.setItem('accessToken', token);
                         setError("");
-                        toast.success('Login successful!')
-                        navigate('/');
+                        toast.success('Login successful!');
                         window.location.reload();
                     }
                     else if (error) {
@@ -61,6 +69,7 @@ const Login = () => {
             setError('Invalid phone number')
         }
     }
+
 
     return (
         <div className="h-screen flex justify-center items-center height">

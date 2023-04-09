@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import Header from "./components/Header/Header";
 import Main from "../src/pages/Main/Main";
 import useAuth from "./hooks/useAuth";

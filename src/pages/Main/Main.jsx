@@ -15,6 +15,7 @@ import ResetPaasword from "../Login/ResetPaasword";
 import NewPassword from "../Login/NewPassword";
 import { pages } from "../../components/Header/menuItems";
 import PostForm from "../../components/Post/PostForm";
+import Common from "../../components/Common";
 
 
 const Main = () => {
@@ -24,12 +25,12 @@ const Main = () => {
     return (
         <main className={`w-full ${path === "/" ? "body-color" : "null"}`}>
             <div className="w-full md:container">
-                <div className="flex md:gap-5">
+                <div className="flex gap-4 lg:gap-5">
                     <aside className={`sidebar z-40 hidden md:block ${path === "/" ? "block" : "md:hidden"}`}>
                         <ul className="pr-4 py-3 rounded">
                             {
                                 pages.map((page, index) => <li key={index} className="nav-link">
-                                    <page.icon className="text-xl" />
+                                    <page.icon className="nav-icon" />
                                     <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
                                 </li>)
                             }
@@ -58,6 +59,12 @@ const Main = () => {
                                 <ProfileUpdate />
                             </RequireAuth>} />
                             <Route path="/postForm" element={<PostForm />} />
+
+                            <Route path="/common" element={
+                                <RequireAuth>
+                                    <Common />
+                                </RequireAuth>
+                            } />
                         </Routes>
                     </div>
                 </div>
