@@ -4,10 +4,10 @@ import baseURL from "../api/api";
 const useAuth = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState('');
+
     console.log(user)
     useEffect(() => {
         const fetchData = async () => {
-            console.log('fetchin user')
             await fetch(`${baseURL}/api/v1/user/profile`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('accessToken')}`

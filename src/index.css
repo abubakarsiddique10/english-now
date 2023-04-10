@@ -22,15 +22,6 @@ font-family: 'Source Sans Pro', sans-serif; */
     background: #F8FAFB;
 }
 
-.bar {
-    height: 100vh;
-}
-
-.b {
-    background: linear-gradient(21deg, #10abff, #1beabd);
-}
-
-
 .v_card:hover .icon {
     transform: scale(1.1);
 }
@@ -39,12 +30,7 @@ font-family: 'Source Sans Pro', sans-serif; */
     transition-duration: .1s;
 }
 .v_card {
-
-/*   box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 15px; */
-
- /*  box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px; */
- 
-box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px; 
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px; 
 }
 
 .active {   
@@ -52,24 +38,13 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
 }
 
 @layer components {
-    /* common css */
-    .logo {
-        @apply font-bold text-2xl font-['Hind_Siliguri']
-    }
+
+    /* common css start*/
     .main-title {
         @apply capitalize text-2xl md:text-3xl font-bold font-['Hind_Siliguri'] text-center
     }
     .sub_title {
         @apply font-bold leading-6 text-xl font-['Hind_Siliguri'] text-[#363637]
-    }
-    .hamburger {
-        @apply text-3xl md:hidden w-8 h-8 flex items-center justify-center hover:bg-gray-200 rounded-full absolute top-4 right-4
-    }
-    .hamburger-menu {
-        @apply fixed top-0 w-full max-w-[200px] bg-white h-full transition-all ease-in duration-500 pr-14 md:pr-4 py-3 rounded border md:hidden z-50
-    }
-    .profile-menu {
-        @apply absolute top-[58px] right-0 w-[200px] bg-[#F8FAFB] border py-1.5 
     }
     .sidebar {
         @apply height flex-1 h-screen bg-inherit sticky top-[67px] w-full max-w-[160px] md:max-w-[200px] lg:max-w-[250px] xl:max-w-[300px] border-r 
@@ -83,6 +58,28 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
     .nav-icon {
         @apply text-[#2563EB] text-xl
     }
+    .logout-btn {
+        @apply flex items-center gap-1 pl-5 py-1.5 hover:bg-gray-200 block w-full
+    }
+     /* common css end*/
+
+
+    /* header css start */
+    .logo {
+        @apply font-bold text-lg text-center md:text-xl font-['Hind_Siliguri']
+    }
+    .hamburger {
+        @apply md:hidden flex items-center
+    }
+    .hamburger-menu {
+        @apply fixed top-16 w-full bg-white transition-all ease-in duration-500 pr-14 md:pr-4 py-3 rounded border-r border-y left-0
+    }
+    .profile-menu {
+        @apply absolute top-[52px] right-0 w-[200px] bg-[#F8FAFB] border py-1.5 z-50
+    }
+    /* header css end */
+
+
 
     /* card css */
     .text-content {
@@ -97,8 +94,35 @@ box-shadow: rgba(149, 157, 165, 0.2) 0px 1px 8px;
     .PhoneInput .PhoneInputInput {
         @apply py-3 border-l pl-1 ml-1 w-full
     }
-    
+
+    /* vocabulary css start */
+    .v-section-img {
+        @apply max-w-[100px] h-[100px] md:max-w-[110px] md:h-[110px] mx-auto
+    }
+    .v-grid {
+        @apply grid grid-cols-1 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-y-4 xl:gap-y-0 mt-11
+    }
+    .v-flex {
+        @apply flex flex-col items-center p-2
+    }
+    .v-img {
+        @apply w-16 h-auto mb-2
+    }
+    .v-content {
+        @apply w-full flex flex-col items-center
+    }
+    .v-word {
+        @apply text-lg font-normal leading-6 capitalize
+    }
+    .v-meaning {
+        @apply text-[15px] mt-0.5 font-['Hind_Siliguri'] font-medium text-[#334155]
+    }
+    .v-load-btn {
+        @apply mt-2 p-3 block text-center text-blue-600 font-bold
+    }
+     /* vocabulary css end */
 }
+
 
 @layer utilities {
     .height {

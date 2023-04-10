@@ -3,8 +3,6 @@ import Home from "../Home/Home";
 import Vocabulary from "../Vocabulary/Vocabulary";
 import VocabularyRendered from "../Vocabulary/VocabularyRendered";
 import VocabularyCategory from "../Vocabulary/VocabularyCategory";
-import Dashboard from "../dashboard/Dashboard";
-import AddVocabulary from "../dashboard/AddVocabulary";
 import Post from "../../components/Post/Post";
 import SignUp from "../Login/SignUp";
 import Login from "../Login/Login";
@@ -15,7 +13,6 @@ import ResetPaasword from "../Login/ResetPaasword";
 import NewPassword from "../Login/NewPassword";
 import { pages } from "../../components/Header/menuItems";
 import PostForm from "../../components/Post/PostForm";
-import Common from "../../components/Common";
 
 
 const Main = () => {
@@ -44,9 +41,6 @@ const Main = () => {
                                 <Route index element={<VocabularyCategory />} />
                                 <Route path=":category" element={<VocabularyRendered />} />
                             </Route>
-                            <Route path="/dashboard" element={<Dashboard />}>
-                                <Route path="addVocabulary" element={<AddVocabulary />} />
-                            </Route>
                             <Route path="/post" element={<Post />} />
                             <Route path="/signup" element={<SignUp />} />
                             <Route path="/login" element={<Login />} />
@@ -59,12 +53,6 @@ const Main = () => {
                                 <ProfileUpdate />
                             </RequireAuth>} />
                             <Route path="/postForm" element={<PostForm />} />
-
-                            <Route path="/common" element={
-                                <RequireAuth>
-                                    <Common />
-                                </RequireAuth>
-                            } />
                         </Routes>
                     </div>
                 </div>

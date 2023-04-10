@@ -14,7 +14,7 @@ const VocabularyRendered = () => {
     const [loading, setLoading] = useState(false)
     const { category } = useParams();
     const { user } = useContext(AppContext);
-    const vslice = vocabulary.slice(0, 3);
+    const vslice = vocabulary?.slice(0, 3);
     let contents = user ? vocabulary : vslice;
 
 
@@ -52,24 +52,23 @@ const VocabularyRendered = () => {
                 <div className="mt-10">
                     <div>
                         <div data-aos="zoom-in-up" >
-                            <img className="max-w-[100px] h-[100px] md:max-w-[110px] md:h-[110px] mx-auto" src={image} />
+                            <img className="v-section-img" src={image} />
                         </div>
                         <h1 className="main-title">{category} Vocabulary</h1>
                     </div>
 
-                    <div className="grid grid-cols-1 xs:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-7 gap-y-4 xl:gap-y-0 mt-11">
+                    <div className="v-grid">
                         {
-                            contents?.map(({ word, meaning, image, _id }) => <div key={_id} className="flex flex-col items-center p-2">
-                                <img className="w-16 h-auto mb-2" src={`${baseURL}/assets/vocabulary/${category + "/" + image}`} alt="" />
-
-                                <div className="w-full flex flex-col items-center">
-                                    <span className="text-lg font-normal leading-6 ">{word}</span>
-                                    <span className="text-[15px] mt-0.5 font-['Hind_Siliguri'] font-medium text-[#334155]">{meaning}</span>
+                            contents?.map(({ word, meaning, image, _id }) => <div key={_id} className="v-flex">
+                                <img className="v-img" src={`${baseURL}/assets/vocabulary/${category + "/" + image}`} alt="" />
+                                <div className="v-content">
+                                    <span className="v-word">{word}</span>
+                                    <span className="v-meaning">{meaning}</span>
                                 </div>
                             </div>)
                         }
                     </div>
-                    {!user && <Link to="/login" className="mt-2 p-3 block text-center text-blue-600 font-bold">Load more</Link>}
+                    {!user && <Link to="/login" className="v-load-btn">Load more</Link>}
                 </div>}
         </>
     )

@@ -1,17 +1,15 @@
 import { memo, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../Button/Button";
-import { BsX } from "react-icons/bs";
-import { FiMenu } from "react-icons/fi";
 import { AppContext } from "../../App";
 import baseURL from "../../api/api";
 import { pages, profilPages } from "./menuItems";
 import { MdLogout } from "react-icons/md";
-import useAuth from "../../hooks/useAuth";
+import { HiMenu, HiX } from "react-icons/hi";
 
 
 const Header = () => {
-    const { user, setUser } = useAuth()
+    const { user, setUser } = useContext(AppContext)
     const [toggle, setToggle] = useState(false);
     const [profileToggle, setProfileToggle] = useState(false);
     const navigate = useNavigate();
@@ -24,31 +22,28 @@ const Header = () => {
     }
 
     return (
-        <header className="shadow py-4 bg-white sticky top-0 w-full z-20">
+        <header className="shadow py-4 bg-white sticky top-0 w-full z-50">
             <div className="md:container px-3">
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
-
                         <div>
-                            <FiMenu onClick={() => setToggle(!toggle)} className="text-xl md:hidden cursor-pointer" />
+                            <button onClick={() => setToggle(!toggle)} className="hamburger">
+                                {toggle ? <HiX className="text-xl" /> : <HiMenu className="text-xl" />}
+                            </button>
 
-                            <ul className={`hamburger-menu ${toggle ? "left-0" : "left-[-200px]"}`}>
+                            <ul className={`hamburger-menu md:hidden ${toggle ? "block" : "hidden"}`}>
                                 {
                                     pages.map((page, index) => <li onClick={() => setToggle(!toggle)} key={index} className="nav-link">
                                         <page.icon className="nav-icon" />
                                         <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
                                     </li>)
                                 }
-                                <BsX onClick={() => setToggle(!toggle)} className="hamburger" />
                             </ul>
                         </div>
-
-                        <Link to="/" className="logo">English Now</Link>
+                        <Link to="/" className="logo z-50">English Now</Link>
                     </div>
 
                     <div className="flex items-center gap-4">
-                        {/* <BsBell className="text-xl" /> */}
-
                         {!user ? <Link to="/login"> <Button>Login</Button></Link> :
 
                             <div className="relative">
@@ -62,7 +57,7 @@ const Header = () => {
                                             <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
                                         </li>)
                                     }
-                                    <button onClick={handleLogOut} className="flex items-center gap-1 pl-5 py-1.5 hover:bg-gray-200 block w-full"><MdLogout className="text-sm" />Log out</button>
+                                    <button onClick={handleLogOut} className="logout-btn"><MdLogout className="text-sm" />Log out</button>
                                 </ul>
                             </div>
                         }
