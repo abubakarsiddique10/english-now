@@ -26,9 +26,8 @@ const Main = () => {
                     <aside className={`sidebar z-40 hidden md:block ${path === "/" ? "block" : "md:hidden"}`}>
                         <ul className="pr-4 py-3 rounded">
                             {
-                                pages.map((page, index) => <li key={index} className="nav-link">
-                                    <page.icon className="nav-icon" />
-                                    <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
+                                pages.map((page, index) => <li key={index}>
+                                    <Link to={page.link} className="nav-link"><page.icon className="nav-icon" /> {page.name}</Link>
                                 </li>)
                             }
                         </ul>

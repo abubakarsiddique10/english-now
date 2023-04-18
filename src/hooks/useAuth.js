@@ -5,7 +5,6 @@ const useAuth = () => {
     const [user, setUser] = useState(null);
     const [error, setError] = useState('');
 
-    console.log(user)
     useEffect(() => {
         const fetchData = async () => {
             await fetch(`${baseURL}/api/v1/user/profile`, {

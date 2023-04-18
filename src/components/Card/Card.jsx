@@ -7,6 +7,8 @@ import { memo, useContext, useState } from "react";
 import Comment from "./Comment";
 import baseURL from "../../api/api";
 import { AppContext } from "../../App";
+import { usePosts } from "../../context/postsProvider";
+import { updateComment } from "../../state/actionCreators/postAction";
 
 
 const Card = ({ post }) => {
@@ -19,7 +21,9 @@ const Card = ({ post }) => {
     const name = user?.userName;
     const userImg = user?.userImgURL;
     const id = user?._id;
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { dispatch } = usePosts();
+
 
 
     const handleSubmitForm = (e) => {
@@ -34,11 +38,14 @@ const Card = ({ post }) => {
             }).then(res => res.json())
                 .then(data => {
                     if (data.status) {
-                        setToggleComment(!toggleComment)
+                        dispatch(updateComment(data))
+                        setComment("")
+                        setToggleComment(!toggleComment);
                     }
                 })
         } else { navigate('/login') }
     }
+
     const handleLike = () => {
         if (user) {
             fetch(`${baseURL}/api/v1/userPost/like/${_id}`, {
@@ -51,6 +58,7 @@ const Card = ({ post }) => {
                 .then(data => data)
         } else { navigate('/login') }
     }
+
     return (
         <>
             <article className="card bg-white border rounded-md mb-2">
@@ -64,7 +72,7 @@ const Card = ({ post }) => {
                             </div>
                         </div>
                         <div onClick={() => setToggle(!toggle)} className="mb-2 cursor-pointer transition-all duration-1000">
-                            <p className="text-content w-full cursor-pointer">{toggle ? description : description.length > 200 ? description.slice(0, 200) + "... See more" : description}</p>
+                            <p className="text-content break-all">{toggle ? description : description.length > 200 ? description.slice(0, 200) + "... See more" : description}</p>
                         </div>
                     </div>
 
@@ -95,10 +103,10 @@ const Card = ({ post }) => {
                             <form onSubmit={handleSubmitForm} className={`mx-4 px-3 flex items-center gap-2 mb-2 `}>
                                 <input
                                     onChange={(e) => setComment(e.target.value)}
-                                    className={`appearance-none block w-full text-grey-darker text-sm py-1 focus:outline-none px-4 bg-gray-100 rounded-full`}
+                                    className={`comment-input`}
                                     value={comment}
                                     placeholder="Write a comment..." />
-                                <button className={`inline-block py-1.5 w-[150px] bg-blue-600 rounded text-white font-medium text-xs leading-tight shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out ${!comment && "opacity-70"}`} disabled={!comment} type="submit">Add comment</button>
+                                <button className={`comment-btn ${!comment && "opacity-70"}`} disabled={!comment} type="submit">Add comment</button>
                             </form>
                             <div >
                                 {

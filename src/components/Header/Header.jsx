@@ -28,14 +28,13 @@ const Header = () => {
                     <div className="flex items-center gap-2">
                         <div>
                             <button onClick={() => setToggle(!toggle)} className="hamburger">
-                                {toggle ? <HiX className="text-xl" /> : <HiMenu className="text-xl" />}
+                                {toggle ? <HiX className="text-2xl" /> : <HiMenu className="text-2xl" />}
                             </button>
 
                             <ul className={`hamburger-menu md:hidden ${toggle ? "block" : "hidden"}`}>
                                 {
-                                    pages.map((page, index) => <li onClick={() => setToggle(!toggle)} key={index} className="nav-link">
-                                        <page.icon className="nav-icon" />
-                                        <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
+                                    pages.map((page, index) => <li onClick={() => setToggle(!toggle)} key={index}>
+                                        <Link to={page.link} className="nav-link"> <page.icon className="nav-icon" /> {page.name}</Link>
                                     </li>)
                                 }
                             </ul>
@@ -53,8 +52,8 @@ const Header = () => {
 
                                 <ul className={`profile-menu ${profileToggle ? "block" : "hidden"}`}>
                                     {
-                                        profilPages.map((page, index) => <li onClick={() => setProfileToggle(!profileToggle)} key={index} className="nav-link">
-                                            <Link to={page.link} className="ml-3 text-black">{page.name}</Link>
+                                        profilPages.map((page, index) => <li onClick={() => setProfileToggle(!profileToggle)} key={index} className="flex items-center">
+                                            <Link to={page.link} className="nav-link">{page.name}</Link>
                                         </li>)
                                     }
                                     <button onClick={handleLogOut} className="logout-btn"><MdLogout className="text-sm" />Log out</button>
@@ -64,7 +63,7 @@ const Header = () => {
                     </div>
                 </div>
             </div>
-        </header>
+        </header >
     )
 }
 export default memo(Header);

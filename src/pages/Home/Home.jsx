@@ -1,8 +1,7 @@
-import { memo, useContext } from "react"
+import { memo } from "react"
 import Card from "../../components/Card/Card"
 import { Loading } from "../../components/Loading/Loading";
-import PostsProvider, { PostsContext, usePosts } from "../../context/postsProvider";
-
+import { usePosts } from "../../context/postsProvider";
 
 
 const Home = () => {

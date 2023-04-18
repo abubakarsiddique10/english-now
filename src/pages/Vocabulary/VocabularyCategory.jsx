@@ -23,13 +23,13 @@ const VocabularyCategory = () => {
                 <h1 className="main-title" >Categories of vocabulary</h1>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 sm:gap-6 mt-11">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 mt-11">
                 {
-                    categories.map((item, index) => <div key={index} className="flex items-center gap-1.5 cursor-pointer v_card px-2 md:pl-1">
-                        <div className={`w-[50px] h-[50px] flex items-center justify-center rounded`}>
+                    categories.map((item, index) => <div onClick={() => handleNavigate(item.category)} key={index} className="flex items-center gap-1.5 cursor-pointer v_card px-2 md:pl-1">
+                        <div className={`w-12 h-12 flex items-center justify-center rounded`}>
                             <img src={item.icon} />
                         </div>
-                        <h3 onClick={() => handleNavigate(item.category)} className="sub_title capitalize">{item.category}</h3>
+                        <h3 className="sub_title capitalize">{item.category}</h3>
                     </div>)
                 }
             </div>

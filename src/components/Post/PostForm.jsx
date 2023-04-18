@@ -5,9 +5,13 @@ import { GrGallery } from "react-icons/gr";
 import Textarea from "../Form/Textarea";
 import baseURL from "../../api/api";
 import { toast } from "react-toastify";
+import { usePosts } from "../../context/postsProvider";
+import { updatePost } from "../../state/actionCreators/postAction";
 
 const PostForm = () => {
-    const { user, setTogglePost } = useContext(AppContext);
+    const { user } = useContext(AppContext);
+    const { dispatch } = usePosts();
+
     const phoneNumber = user?.phoneNumber;
     const userImgURL = user?.userImgURL;
     const userName = user?.userName;
@@ -35,8 +39,9 @@ const PostForm = () => {
             body: formData
         }).then((res) => res.json())
             .then(data => {
-                console.log('succes', data)
                 if (data.status) {
+                    toast.success(data.message)
+                    dispatch(updatePost(data.post))
                 } else if (data.error.includes('File too large')) {
                     toast.error("file must be less than 500 KB", {
                         autoClose: 10000,

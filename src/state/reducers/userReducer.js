@@ -1,10 +1,11 @@
-import { FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS } from "../actionTypes/actionTypes"
+import { FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, UPDATE_COMMENT, UPDATE_POST } from "../actionTypes/actionTypes"
 
 export const initialState = {
     loading: false,
     posts: [],
     error: "",
 }
+
 export const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case FETCHING_START:
@@ -24,6 +25,21 @@ export const userReducer = (state = initialState, action) => {
                 loading: false,
                 error: action.payload
             }
+        case UPDATE_POST:
+            return {
+                ...state,
+                posts: [...state.posts, action.payload]
+            }
+        case UPDATE_COMMENT:
+            state.posts.filter(post => {
+                if (post._id === action.payload.id) {
+                    return post.comments = action.payload.comments
+                }
+            });
+            return {
+                ...state
+            }
+
         default:
             return state
     }
