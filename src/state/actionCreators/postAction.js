@@ -1,4 +1,4 @@
-import { FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, UPDATE_COMMENT, UPDATE_POST } from "../actionTypes/actionTypes"
+import { FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, UPDATE_COMMENT, UPDATE_LIKE, UPDATE_POST } from "../actionTypes/actionTypes"
 
 export const fetchStart = (data) => {
     return {
@@ -21,10 +21,15 @@ export const updatePost = (post) => {
         payload: post
     }
 }
-
 export const updateComment = (data) => {
     return {
         type: UPDATE_COMMENT,
+        payload: data
+    }
+}
+export const updateLike = (data) => {
+    return {
+        type: UPDATE_LIKE,
         payload: data
     }
 }

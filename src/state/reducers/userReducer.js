@@ -1,4 +1,4 @@
-import { FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, UPDATE_COMMENT, UPDATE_POST } from "../actionTypes/actionTypes"
+import { FETCHING_ERROR, FETCHING_START, FETCHING_SUCCESS, UPDATE_COMMENT, UPDATE_LIKE, UPDATE_POST } from "../actionTypes/actionTypes"
 
 export const initialState = {
     loading: false,
@@ -39,7 +39,15 @@ export const userReducer = (state = initialState, action) => {
             return {
                 ...state
             }
-
+        case UPDATE_LIKE:
+            state.posts.filter(post => {
+                if (post._id === action.payload.id) {
+                    return post.likes = action.payload.likes
+                }
+            })
+            return {
+                ...state
+            }
         default:
             return state
     }

@@ -7,10 +7,12 @@ import baseURL from "../../api/api";
 import { toast } from "react-toastify";
 import { usePosts } from "../../context/postsProvider";
 import { updatePost } from "../../state/actionCreators/postAction";
+import { useNavigate } from "react-router-dom";
 
 const PostForm = () => {
     const { user } = useContext(AppContext);
     const { dispatch } = usePosts();
+    const navigate = useNavigate()
 
     const phoneNumber = user?.phoneNumber;
     const userImgURL = user?.userImgURL;
@@ -41,7 +43,9 @@ const PostForm = () => {
             .then(data => {
                 if (data.status) {
                     toast.success(data.message)
-                    dispatch(updatePost(data.post))
+                    setValue({})
+                    dispatch(updatePost(data.post));
+                    navigate('/')
                 } else if (data.error.includes('File too large')) {
                     toast.error("file must be less than 500 KB", {
                         autoClose: 10000,

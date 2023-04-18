@@ -8,7 +8,7 @@ import Comment from "./Comment";
 import baseURL from "../../api/api";
 import { AppContext } from "../../App";
 import { usePosts } from "../../context/postsProvider";
-import { updateComment } from "../../state/actionCreators/postAction";
+import { updateComment, updateLike } from "../../state/actionCreators/postAction";
 
 
 const Card = ({ post }) => {
@@ -55,7 +55,11 @@ const Card = ({ post }) => {
                 },
                 body: JSON.stringify({ userId: id })
             }).then(res => res.json())
-                .then(data => data)
+                .then(data => {
+                    if (data.status) {
+                        dispatch(updateLike(data))
+                    }
+                })
         } else { navigate('/login') }
     }
 
